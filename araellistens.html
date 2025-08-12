@@ -1,0 +1,858 @@
+<!DOCTYPE html> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="utf-8">
+    <title>Arael Listens</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="siteimages/intface2.png"> 
+
+<style> 
+body {
+    background-color: black;
+}
+
+body::before {
+content: "";
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-image: url('siteimages/atlantis cellophane shorter.gif'); 
+background-size: cover;
+background-position: center;
+opacity: 0.2; 
+z-index: -1;
+}
+
+@font-face {
+font-family: 'ttcw type';
+src: url('Fonts/TTCWTEST4.woff2') format('woff2');
+font-weight: normal; 
+font-style: normal;
+}
+
+@font-face {
+font-family: 'DAYROM';
+src: url('Fonts/DAYROM__.woff2') format('woff2');
+font-weight: normal; 
+font-style: normal; 
+}
+
+@font-face {
+font-family: 'gismonda';
+src: url('Fonts/webfontkit-20250128-111642/gismonda-webfont.woff2') format('woff2'),
+url('Fonts/webfontkit-20250128-111642/gismonda-webfont.woff2') format('woff2');
+font-weight: normal; 
+font-style: normal; 
+}
+
+@font-face {
+font-family: 'teutonic';
+src: url('Fonts/teutonic1.woff2') format('woff2'),
+url('Fonts/teutonic1.woff2') format('woff2');
+font-weight: normal;
+font-style: normal; 
+}
+
+.rainbow-text {
+animation: rainbow 5s linear infinite;
+}
+
+@keyframes rainbow {
+  0%   { color: red; }
+  16%  { color: orange; }
+  33%  { color: yellow; }
+  50%  { color: rgb(0, 255, 0); }
+  66%  { color: rgb(0, 149, 255); }
+  83%  { color: rgb(174, 62, 255); }
+  100% { color: red; } 
+}
+
+
+.top-bar {
+position: fixed;   
+top: 0;       
+left: 0;           
+width: 100%;     
+height: 130px;     
+background: url('siteimages/topbarbg2.png') no-repeat center;
+background-size: 110% 110%; 
+display: flex;
+justify-content: center; 
+align-items: center;
+z-index: 1000;    
+}
+
+.top-title {
+color: #FFD94F;
+font-family: 'ttcw type';
+font-size: 32px;
+font-weight: bold;
+margin: 0;
+padding-bottom: 80px;
+text-shadow: 
+-1px -1px 0 #000,  
+1px -1px 0 #000,
+-1px  1px 0 #000,
+1px  1px 0 #000;
+}
+
+.center {
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 50%; 
+} 
+
+.back-button {
+position: fixed;
+top: 20px;
+left: 20px;
+color: #FFD94F;
+font-family: 'ttcw type', sans-serif;
+font-size: 20px;
+text-decoration: none;
+z-index: 2000;
+background-color: transparent;
+padding: 5px 10px;
+border: 2px solid #FFD94F;
+border-radius: 20px;
+opacity: 0.3;
+transition: background-color 0.3s, transform 0.2s;
+}
+
+.back-button:hover {
+background-color: rgba(255, 217, 79, 0.1);
+transform: scale(1.05);
+opacity: 1.0;
+cursor: pointer;
+}
+
+.audio-wrapper {
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 100px;
+background: url('siteimages/audiobarbg3.png') no-repeat center;
+background-size: 110% 110%; 
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 1000;
+}
+
+.audio-btn {
+font-size: 28px;
+background-color: transparent;
+border: none;
+color: #FFD94F;
+cursor: pointer;
+z-index: 1;
+transform: translateY(50px);
+-webkit-text-stroke: 2px black; 
+}
+
+.volume-container {
+position: absolute;
+right: 55px;
+bottom: 10px;
+}
+
+.volume-slider {
+width: 150px; 
+height: 6px;
+background: rgb(0, 0, 0);
+accent-color: #FFD94F;
+border: 1px solid black;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.volume-slider::-webkit-slider-thumb {
+background-color: #FFD94F; 
+border-radius: 50%;
+border: 2px solid #000;
+width: 20px;
+height: 20px;
+cursor: pointer;
+}
+
+.volume-slider:hover {
+background: rgb(0, 0, 0);
+}
+
+.timeline-container {
+    position: absolute;
+  
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 50px;
+    width: 50%;
+}
+
+.timeline-slider {
+    width: 100%;
+    height: 6px;
+    background: #000;
+    accent-color: #FFD94F;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.timeline-slider::-webkit-slider-thumb {
+    background-color: #FFD94F; 
+    border-radius: 50%;
+    border: 2px solid #000;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+
+.audio-grid {
+    margin-top: 60px;
+    display: grid;
+    max-width: 45%;
+    gap: 5px;
+    padding: 5px;
+    margin-bottom: 120px; 
+    background-color: #000;
+    border: 2px solid #ff4fe8; 
+   
+}
+
+.audio-track {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+    margin-bottom: 5px;
+    color: #4fffa7;
+    font-family: 'DAYROM', sans-serif;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.audio-track:hover {
+    background-color: #333;
+    transform: scale(1.02);
+}
+
+.track-title {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.download-button {
+    text-decoration: none;
+    font-size: 20px;
+    color: #FFD94F;
+    background-color: transparent;
+    padding: 4px 10px;
+    transition: background-color 0.2s, transform 0.2s;
+    margin-left: 150px;        
+    margin-right: auto;    
+    justify-content: start; 
+}
+
+.download-button:hover {
+    background-color: rgba(255, 217, 79, 0.1);
+    transform: scale(1.1);
+}
+
+.side-visual {
+    max-width: 33%;
+    border: 2px solid #ff4fe8; 
+    top: 200px;
+    z-index: 1000;
+
+}
+
+#chorusControls {
+  position: fixed;
+  top: 30%;
+  right: 60px;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid #FFD94F;
+  padding: 12px 16px;
+  z-index: 1000;
+  display: none;
+  color: #FFD94F;
+  font-family: sans-serif;
+  box-shadow: 0 0 10px rgba(255, 217, 79, 0.3);
+}
+
+#chorusControls label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#chorusControls input[type="range"] {
+  width: 150px;
+}
+
+#delayControls {
+  position: fixed;
+  top: 45%;
+  right: 60px;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid #FFD94F;
+  padding: 12px 16px;
+  z-index: 1000;
+  display: none;
+  color: #FFD94F;
+  font-family: sans-serif;
+  box-shadow: 0 0 10px rgba(255, 217, 79, 0.3);
+}
+
+#delayControls label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#delayControls input[type="range"] {
+  width: 150px;
+}
+
+#filterControls {
+  position: fixed;
+  top: 15%;
+  right: 60px;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid #FFD94F;
+  padding: 12px 20px;
+  z-index: 1000;
+  display: none;
+  color: #FFD94F;
+  font-family: sans-serif;
+  box-shadow: 0 0 10px rgba(255, 217, 79, 0.3);
+}
+
+#filterControls label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#filterControls input[type="range"] {
+  width: 150px;
+}
+
+
+</style>
+</head>
+
+
+<body>
+
+    <div class="top-bar" id="topBar">
+        <h1 class="top-title">arael listens</h1>
+    </div> 
+    
+    <a href="index.html" class="back-button">⬅</a>
+
+<div style="padding-top: 100px;"></div>
+<p style="text-align: center;font-family: 'teutonic';padding: 40px;" class="rainbow-text center">ARAEL FOREVER</p>
+
+    <div class="side-visual center" style="background-image: url('siteimages/morphic dungeon.gif');background-repeat: no-repeat;background-size: cover;">
+
+        
+       
+         <pre style="font-family: 'DAYROM'; text-align: center; padding:20px;font-size: medium;" class="rainbow-text">
+    ⡀⠤⠒⠉⠉⠑⠢⡀⠀⠀⣀⣀⣀⡀⠀⠀⠀⡠⠔⠊⠉⠉⠉⠢⡀
+    ⢳⡀⠀⣀⣀⣀⠀⠹⡄⣜⠁⠀⠀⠈⡆⠀⡜⠁⠀⣀⣀⣀⠀⢱
+    ⠀⠑⠦⡀⠀⠀⠉⠉⢹⢸⠀⠠⠤⠔⡇⢠⠇⠉⠉⠀⠀⠀⡜
+    ⠀⠀⠀⠈⠑⠢⢄⡀⡜⠀⢆⠀⠀⢠⡇⢸⡀⢀⣀⠤⠒⠊
+    ⠀⠀⠀⠀⠀⠀⠀⠉⠁⠀⠀⠑⠤⠜⠁⠀⠀⠀⠀⠀⠀
+         </pre>
+        </div>
+    
+
+
+<div style="padding-top: 20px;">
+
+    
+</div>
+  <div class="audio-grid center">
+        
+    <div class="audio-track" data-src="araellistens audio/01_hybrid temple.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">1</span>
+        <span class="track-title">hybrid_temple.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/01_hybrid temple.mp3" download>⬇</a>
+    </div>
+
+    <div class="audio-track" data-src="araellistens audio/02_vanilla.mp3"> 
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">2</span>
+        <span class="track-title">vanilla.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/02_vanilla.mp3" download>⬇</a>
+    </div>
+
+    <div class="audio-track" data-src="araellistens audio/03_spc rm1.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">3</span>
+        <span class="track-title">spc_rm1.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/03_spc rm1.mp3" download>⬇</a>
+    </div>
+
+    <div class="audio-track" data-src="araellistens audio/04_mention.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">4</span>
+        <span class="track-title">mention.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/04_mention.mp3" download>⬇</a>
+    </div>
+
+    <div class="audio-track" data-src="araellistens audio/05_square flutes.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">5</span>
+        <span class="track-title">square_flutes.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/05_square flutes.mp3" download>⬇</a>
+    </div>
+
+    <div class="audio-track" data-src="araellistens audio/06_spc rm3.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">6</span>
+        <span class="track-title">spc_rm3.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/06_spc rm3.mp3" download>⬇</a>
+    </div>
+
+    <div class="audio-track" data-src="araellistens audio/07_FOC.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">7</span>
+        <span class="track-title">F.O.C.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/07_FOC.mp3" download>⬇</a>
+    </div>
+
+    <div class="audio-track" data-src="araellistens audio/08_atlantis cellophane.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">8</span>
+        <span class="track-title">atlantis_cellophane.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/08_atlantis cellophane.mp3" download>⬇</a>
+    </div>
+
+    <div class="audio-track" data-src="araellistens audio/09_morphic corridor.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">9</span>
+        <span class="track-title">morphic_corridor.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/09_morphic corridor.mp3" download>⬇</a>
+    </div>
+
+    <div class="audio-track" data-src="araellistens audio/10_spc rm7.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">10</span>
+        <span class="track-title">spc_rm7.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/10_spc rm7.mp3" download>⬇</a>
+    </div>
+
+    <div class="audio-track" data-src="araellistens audio/11_ohmic.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">11</span>
+        <span class="track-title">ohmic.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/11_ohmic.mp3" download>⬇</a>
+    </div>
+
+    <div class="audio-track" data-src="araellistens audio/12_again.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">12</span>
+        <span class="track-title">again.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/12_again.mp3" download>⬇</a>
+    </div>
+    
+    <div class="audio-track" data-src="araellistens audio/13_living arcs.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">13</span>
+        <span class="track-title">living_arcs.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/13_living arcs.mp3" download>⬇</a>
+    </div>
+
+    <div class="audio-track" data-src="araellistens audio/2YRD_0F_4LL_WL$$$.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">14</span>
+        <span class="track-title">2YRD_0F_4LL_WL$$$.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/2YRD_0F_4LL_WL$$$.mp3" download>⬇</a>
+    </div>
+
+    <div class="audio-track" data-src="araellistens audio/spc_rm10.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">15</span>
+        <span class="track-title">spc_rm10.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/spc_rm10.mp3" download>⬇</a>
+    </div>
+
+    <div class="audio-track" data-src="araellistens audio/16_the_window.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">16</span>
+        <span class="track-title">the_window.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/16_the_window.mp3" download>⬇</a>
+    </div>
+
+    <div class="audio-track" data-src="araellistens audio/17_bonds.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">17</span>
+        <span class="track-title">bonds.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/17_bonds.mp3" download>⬇</a>
+    </div>
+
+    <div class="audio-track" data-src="araellistens audio/18_angel_rays.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">18</span>
+        <span class="track-title">angel_rays.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/18_angel_rays.mp3" download>⬇</a>
+    </div>
+
+    <div class="audio-track" data-src="araellistens audio/19.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">19</span>
+        <span class="track-title">19.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/19.mp3" download>⬇</a>
+    </div>
+
+    <div class="audio-track" data-src="araellistens audio/20_aleutia.mp3">
+        <span style="color: #ffd94f59; font-family: 'DAYROM'; font-size: large;margin-right: 20px;">20</span>
+        <span class="track-title">aleutia.mp3</span>
+        <span class="track-duration" style="margin-left: 10px; color: #FFD94F80; font-size: 14px;">--:--</span>
+        <a class="download-button" href="araellistens audio/20_aleutia.mp3" download>⬇</a>
+    </div>
+
+    
+</div>
+
+<div style="padding-bottom: 100px;">
+    <a href="https://www.youtube.com/@AraelBow">
+    <img src="siteimages/CHRYSALIS EGG MORPHO.gif" alt="eggmorph" style="height: 100px;width: 100px;border: 2px solid #FFD94F;" class="center">
+    </a>
+</div>
+    
+
+
+    <div class="audio-wrapper" style="padding-bottom: 20px;"> 
+        <div class="audio-controls">
+            <div class="left-space"></div> 
+            <button id="playPauseBtn" class="audio-btn">❚❚</button>
+
+<button id="chorusBtn" class="audio-btn">👁</button>
+<button id="resetFXBtn" class="audio-btn" style="color: rgb(255, 0, 0);">❌</button>
+
+<div id="filterControls" style="display: none; margin-top: 20px;">
+    <label style="color: #FFD94F;">⟢:
+        <input id="lowpassSlider" type="range" min="0" max="100" value="100">
+
+    </label>
+  </div>
+
+<div id="chorusControls" style="display: none; padding: 10px;">
+    <label style="color: #FFD94F;">⨕:
+      <input id="lfoRate" type="range" min="0.1" max="10" step="0.1" value="0.8">
+    </label>
+    <br>
+    <label style="color: #FFD94F;">𐄷:
+      <input id="lfoDepth" type="range" min="0.001" max="0.05" step="0.001" value="0.015">
+    </label>
+  </div>
+
+  <div id="delayControls" style="display: none; margin-top: 20px;">
+    <label style="color: #FFD94F;">🜁:
+      <input id="delayTimeSlider" type="range" min="0" max="1" step="0.01" value="0.3">
+    </label>
+    <br>
+    <label style="color: #FFD94F;">⨗:
+      <input id="feedbackSlider" type="range" min="0" max="0.95" step="0.01" value="0.4">
+    </label>
+  </div>
+
+  
+
+            <div class="timeline-container">
+                <input type="range" id="timelineSlider" class="timeline-slider" min="0" max="100" value="0">
+            </div>
+    
+            <div class="volume-container">
+                <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.01">
+            </div>
+        </div>
+    
+        <audio id="backgroundAudio" loop autoplay>
+            <source id="audioSource" src="" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    
+
+    <script>
+    const audio = document.getElementById("backgroundAudio");
+const playPauseBtn = document.getElementById("playPauseBtn");
+const volumeSlider = document.getElementById("volumeSlider");
+const audioSource = document.getElementById("audioSource");
+const tracks = document.querySelectorAll(".audio-track");
+
+playPauseBtn.textContent = "❚❚";
+
+
+playPauseBtn.addEventListener("click", () => {
+    if (audio.paused) {
+        audio.play();
+        playPauseBtn.textContent = "❚❚"; 
+    } else {
+        audio.pause();
+        playPauseBtn.textContent = "►"; 
+    }
+});
+
+
+volumeSlider.addEventListener("input", () => {
+    audio.volume = volumeSlider.value;
+});
+
+
+window.addEventListener("DOMContentLoaded", () => {
+    const defaultVolume = 0.5;
+    audio.volume = defaultVolume;
+    volumeSlider.value = defaultVolume;
+});
+
+
+
+tracks.forEach(track => {
+    track.addEventListener("click", (e) => {
+       
+        if (e.target.classList.contains("download-button")) return;
+
+        const newSrc = track.getAttribute("data-src");
+        audioSource.src = newSrc;
+        audio.load();
+        audio.play();
+        playPauseBtn.textContent = "❚❚";
+    });
+});
+
+
+const timelineSlider = document.getElementById("timelineSlider");
+
+
+audio.addEventListener("timeupdate", () => {
+    if (!timelineSlider.getAttribute("data-user-seeking")) {
+        const percent = (audio.currentTime / audio.duration) * 100;
+        timelineSlider.value = percent || 0;
+    }
+});
+
+
+timelineSlider.addEventListener("input", () => {
+    timelineSlider.setAttribute("data-user-seeking", "true");
+});
+
+timelineSlider.addEventListener("change", () => {
+    const seekTime = (timelineSlider.value / 100) * audio.duration;
+    audio.currentTime = seekTime;
+    timelineSlider.removeAttribute("data-user-seeking");
+});
+
+document.querySelectorAll('.audio-track').forEach(track => {
+    const src = track.getAttribute('data-src');
+    const durationSpan = track.querySelector('.track-duration');
+    if (!durationSpan) return;
+
+    const tempAudio = new Audio();
+    tempAudio.src = src;
+    tempAudio.preload = 'metadata';
+
+    tempAudio.addEventListener('loadedmetadata', () => {
+        const duration = tempAudio.duration;
+        const minutes = Math.floor(duration / 60);
+        const seconds = Math.floor(duration % 60).toString().padStart(2, '0');
+        durationSpan.textContent = `${minutes}:${seconds}`;
+    });
+});
+
+
+    </script>
+
+<script>
+    
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const sourceNode = audioCtx.createMediaElementSource(audio);
+    sourceNode.connect(audioCtx.destination);
+  
+    let fxNodes = [];
+  
+    document.body.addEventListener("click", () => {
+      if (audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+    }, { once: true });
+  
+    function clearFX() {
+  fxNodes.forEach(node => node.disconnect());
+  fxNodes = [];
+  sourceNode.disconnect();
+  sourceNode.connect(audioCtx.destination);
+
+  document.getElementById("chorusControls").style.display = "none";
+  document.getElementById("delayControls").style.display = "none";
+  document.getElementById("filterControls").style.display = "none";
+}
+
+
+  
+    document.getElementById("resetFXBtn").addEventListener("click", clearFX);
+  
+    document.getElementById("chorusBtn").addEventListener("click", () => {
+  clearFX();
+
+  // Show both FX panels
+  document.getElementById("chorusControls").style.display = "block";
+  document.getElementById("delayControls").style.display = "block";
+
+
+  // === FILTER SETUP ===
+const lowpassFilter = audioCtx.createBiquadFilter();
+lowpassFilter.type = "lowpass";
+
+const lowpassSlider = document.getElementById("lowpassSlider");
+lowpassSlider.value = 100; // Max slider position
+
+function sliderToFrequency(sliderValue) {
+  const minFreq = 20;
+  const maxFreq = 20000;
+  const minLog = Math.log10(minFreq);
+  const maxLog = Math.log10(maxFreq);
+  const logValue = minLog + (sliderValue / 100) * (maxLog - minLog);
+  return Math.pow(10, logValue);
+}
+
+// Set initial frequency to 20kHz
+let now = audioCtx.currentTime;
+const initialFreq = sliderToFrequency(100);
+lowpassFilter.frequency.cancelScheduledValues(now);
+lowpassFilter.frequency.setValueAtTime(initialFreq, now);
+
+// Handle slider input
+lowpassSlider.addEventListener("input", () => {
+  const normalized = parseFloat(lowpassSlider.value);
+  const freq = sliderToFrequency(normalized);
+  now = audioCtx.currentTime;
+  lowpassFilter.frequency.cancelScheduledValues(now);
+  lowpassFilter.frequency.setValueAtTime(lowpassFilter.frequency.value, now);
+  lowpassFilter.frequency.linearRampToValueAtTime(freq, now + 0.05);
+});
+
+document.getElementById("filterControls").style.display = "block";
+
+
+
+  // CHORUS
+  const delay = audioCtx.createDelay();
+  delay.delayTime.value = 0.03;
+
+  const lfo = audioCtx.createOscillator();
+  const lfoGain = audioCtx.createGain();
+
+  const rateSlider = document.getElementById("lfoRate");
+  const depthSlider = document.getElementById("lfoDepth");
+
+  lfo.frequency.value = parseFloat(rateSlider.value);
+  lfoGain.gain.value = parseFloat(depthSlider.value);
+
+  rateSlider.oninput = () => {
+  const targetFreq = parseFloat(rateSlider.value);
+  const now = audioCtx.currentTime;
+  lfo.frequency.cancelScheduledValues(now);
+  lfo.frequency.setValueAtTime(lfo.frequency.value, now);
+  lfo.frequency.linearRampToValueAtTime(targetFreq, now + 0.1);
+};
+
+depthSlider.oninput = () => {
+  const targetDepth = parseFloat(depthSlider.value);
+  const now = audioCtx.currentTime;
+  lfoGain.gain.cancelScheduledValues(now);
+  lfoGain.gain.setValueAtTime(lfoGain.gain.value, now);
+  lfoGain.gain.linearRampToValueAtTime(targetDepth, now + 0.1);
+};
+
+
+  lfo.connect(lfoGain);
+  lfoGain.connect(delay.delayTime);
+  lfo.start();
+
+  const dryGain = audioCtx.createGain();
+  const chorusWetGain = audioCtx.createGain();
+  dryGain.gain.value = 0.6;
+  chorusWetGain.gain.value = 0.6;
+
+  // DELAY
+  const delayNode = audioCtx.createDelay(8.0);
+  const feedbackGain = audioCtx.createGain();
+  const delayWetGain = audioCtx.createGain();
+  delayWetGain.gain.value = 0.5;
+
+  const targetTime = parseFloat(document.getElementById("delayTimeSlider").value);
+
+delayNode.delayTime.cancelScheduledValues(now);
+delayNode.delayTime.setValueAtTime(delayNode.delayTime.value, now); 
+delayNode.delayTime.linearRampToValueAtTime(targetTime, now + 0.1); 
+  feedbackGain.gain.value = parseFloat(document.getElementById("feedbackSlider").value);
+
+  document.getElementById("delayTimeSlider").oninput = () => {
+  const targetTime = parseFloat(document.getElementById("delayTimeSlider").value);
+  const now = audioCtx.currentTime;
+  delayNode.delayTime.cancelScheduledValues(now);
+  delayNode.delayTime.setValueAtTime(delayNode.delayTime.value, now);
+  delayNode.delayTime.linearRampToValueAtTime(targetTime, now + 0.05);
+};
+
+  document.getElementById("feedbackSlider").oninput = () => {
+    feedbackGain.gain.value = parseFloat(document.getElementById("feedbackSlider").value);
+  };
+
+  // Feedback loop
+  delayNode.connect(feedbackGain);
+  feedbackGain.connect(delayNode);
+
+  // CONNECTIONS
+  
+  sourceNode.disconnect();
+sourceNode.connect(lowpassFilter);
+
+// Connect filter → chorus → delay → output
+lowpassFilter.connect(delay);             // Chorus
+delay.connect(delayNode);                 // Then delay
+delayNode.connect(delayWetGain);          // Delay output
+
+// Dry path
+lowpassFilter.connect(dryGain);
+
+// Wet output gains
+dryGain.connect(audioCtx.destination);
+delayWetGain.connect(audioCtx.destination);
+
+// Optional: remove chorusWetGain if not used separately
+
+
+
+  
+
+  dryGain.connect(audioCtx.destination);
+  chorusWetGain.connect(audioCtx.destination);
+  delayWetGain.connect(audioCtx.destination);
+
+  fxNodes = [delay, lfo, lfoGain, dryGain, chorusWetGain, delayNode, feedbackGain, delayWetGain];
+});
+
+  </script>
+
+    
+</body>
+</html>
+
+
+
+<!-- maybe make 7 more audio loops to get it up to 20-->
+<!-- have different gif visualisers for each 'track' perhaps with some kind of description for each?-->

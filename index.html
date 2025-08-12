@@ -1,0 +1,314 @@
+<!DOCTYPE html> 
+
+<html lang="en">
+    <head> 
+        <meta charset="utf-8">
+        <title>Arael Bow</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="siteimages/intface2.png"> 
+       
+<style>
+
+body {
+background-color: rgb(2, 0, 31);
+margin: 0;
+padding: 0;
+position: relative;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+body::before {
+content: "";
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-image: url('siteimages/atlantis cellophane shorter.gif'); 
+background-size: cover;
+background-position: center;
+opacity: 0.2; 
+z-index: -1;
+}
+
+.center {
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 100%; 
+}
+
+.hover-zone {
+fill: transparent;
+stroke: rgba(255, 0, 0, 0); 
+stroke-width: 3;
+pointer-events: all; 
+transition: stroke 0.3s ease;
+}
+
+.hover-zone:hover {
+stroke: rgba(50, 55, 237, 1);
+animation: glowPulse 1.5s infinite;
+filter: url(#glow);
+}
+
+@keyframes glowPulse {
+0% {
+stroke-width: 3;
+stroke: rgb(255, 255, 255);
+filter: url(#glow);
+}
+50% {
+stroke-width: 7;
+stroke: rgba(50, 55, 237, 0.5);
+filter: url(#glow);
+}
+100% {
+stroke-width: 3;
+stroke: rgba(50, 55, 237, 1);
+filter: url(#glow);
+}
+}
+
+.section {
+max-width: 600px; 
+margin: 20px auto; 
+padding: 20px; 
+text-align: center;
+font-family: 'Times New Roman', Times, serif;
+}
+
+.section h1 {
+text-align: center; 
+color:rgb(236, 236, 236);
+}  
+
+.section pre {
+color:rgb(236, 236, 236);
+text-align: center;
+font-family: 'Times New Roman', Times, serif;
+} 
+
+.audio-wrapper {
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 100px;
+background: url('siteimages/audiobarbg3.png') no-repeat center;
+background-size: 110% 110%; 
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 1000;
+}
+
+.audio-btn {
+font-size: 28px;
+background-color: transparent;
+border: none;
+color: #FFD94F;
+cursor: pointer;
+z-index: 1;
+transform: translateY(50px);
+
+-webkit-text-stroke: 2px black; 
+}
+   
+.volume-container {
+position: absolute;
+right: 55px;
+bottom: 10px;
+}
+
+.volume-slider {
+width: 150px; 
+height: 6px;
+background: rgb(0, 0, 0);
+accent-color: #FFD94F;
+border: 1px solid black; 
+cursor: pointer;
+transition: all 0.3s ease;
+}
+ 
+.volume-slider::-webkit-slider-thumb {
+background-color: #FFD94F; 
+border-radius: 50%;
+border: 2px solid #000;
+width: 20px;
+height: 20px;
+cursor: pointer;
+}
+
+       
+.volume-slider:hover {
+background: rgb(0, 0, 0);
+}
+
+</style>
+    
+    </head> 
+    <body> 
+
+   
+    
+      <div style="padding-top: 40px;"></div>
+
+        <div style="position: relative; width: 700px; height: 700px; margin: 0 auto;" class="center">
+          
+            <img src="siteimages/window_render_transparent.png" alt="window" 
+                 style="width: 700px; height: 700px; display: block;">
+          
+           
+            <svg viewBox="0 0 700 700" 
+                 style="position: absolute; top: 0; left: 0; width: 700px; height: 700px; pointer-events: all;">
+          
+              
+              <defs>
+                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="red" flood-opacity="0.8" />
+                </filter>
+              </defs>
+
+              <!--Arael World-->
+              <a xlink:href="araelworld.html">
+                <polygon 
+                  points="259,267 337,234 362,234 440,267 412,183 350,122, 349,122 286,183" 
+                  class="hover-zone sound-hover"
+                  data-audio="Audio/araelbow page audio/araelbow pane select.mp3" />
+              </a>
+
+              <!--Arael Sees-->
+              <a xlink:href="araelsees.html">
+                <polygon 
+                  points="257,353 298,353 298,298 290,285 282,283 281,283 268,293 257,313" 
+                  class="hover-zone sound-hover"
+                  data-audio="Audio/araelbow page audio/araelbow pane select.mp3" />
+              </a>
+
+              <!--Arael Listens-->
+              <a xlink:href="araellistens.html">
+                <polygon 
+                  points="401,353 422,350 442,353 442,312 432,294 417,283 406,288 401,298" 
+                  class="hover-zone sound-hover"
+                  data-audio="Audio/araelbow page audio/araelbow pane select.mp3" />
+              </a>
+          
+              <!-- Snake Rings -->
+              <a xlink:href="snakerings.html">
+                <polygon 
+                  points="308,353 391,353 391,294 374,269 350,254 325,269 308,294" 
+                  class="hover-zone sound-hover"
+                  data-audio="Audio/araelbow page audio/araelbow pane select.mp3" />
+              </a>
+          
+              <!-- Chrysalis -->
+              <a xlink:href="chrysalisanegginyourhands.html">
+                <polygon 
+                  points="256,595 256,362 297,362 297,595" 
+                  class="hover-zone sound-hover"
+                  data-audio="Audio/araelbow page audio/araelbow pane select.mp3" />
+              </a>
+          
+              <!-- Trust -->
+              <a xlink:href="trust.html">
+                <polygon 
+                  points="307,595 307,365 391,365 391,595" 
+                  class="hover-zone sound-hover"
+                  data-audio="Audio/araelbow page audio/araelbow pane select.mp3" />
+              </a>
+          
+              <!-- Soul Sea -->
+              <a xlink:href="soulseaswallowthesunwhole.html">
+                <polygon 
+                  points="402,595 402,362 443,362 443,595" 
+                  class="hover-zone sound-hover"
+                  data-audio="Audio/araelbow page audio/araelbow pane select.mp3" />
+              </a>
+            </svg>
+          </div>
+
+<div class="audio-wrapper" style="padding-bottom: 20px;"> 
+  <div class="audio-controls">
+      <div class="left-space"></div> 
+
+  
+      <button id="playPauseBtn" class="audio-btn">❚❚</button>
+
+     
+      <div class="volume-container">
+         
+          <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.01">
+      </div>
+  </div>
+
+  <audio id="backgroundAudio" loop autoplay>
+      <source src="Audio/araelbow space1 loop.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+  </audio>
+</div>
+
+<script>
+    const hoverAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const hoverAudioBuffers = {};
+  
+    async function loadHoverAudio(url) {
+      if (hoverAudioBuffers[url]) return hoverAudioBuffers[url];
+      const response = await fetch(url);
+      const arrayBuffer = await response.arrayBuffer();
+      const audioBuffer = await hoverAudioContext.decodeAudioData(arrayBuffer);
+      hoverAudioBuffers[url] = audioBuffer;
+      return audioBuffer;
+    }
+  
+    async function playHoverSound(url) {
+      const buffer = await loadHoverAudio(url);
+      const source = hoverAudioContext.createBufferSource();
+      source.buffer = buffer;
+      source.connect(hoverAudioContext.destination);
+      source.start(0);
+    }
+  
+    document.querySelectorAll('.sound-hover').forEach(zone => {
+      zone.addEventListener('mouseenter', function () {
+        const soundFile = this.getAttribute('data-audio');
+        if (soundFile) {
+          playHoverSound(soundFile);
+        }
+      });
+    });
+
+    
+const audio = document.getElementById("backgroundAudio");
+const playPauseBtn = document.getElementById("playPauseBtn");
+const volumeSlider = document.getElementById("volumeSlider");
+
+playPauseBtn.textContent = "❚❚";
+
+playPauseBtn.addEventListener("click", () => {
+    if (audio.paused) {
+        audio.play();
+        playPauseBtn.textContent = "❚❚"; 
+    } else {
+        audio.pause();
+        playPauseBtn.textContent = "►"; 
+    }
+});
+
+volumeSlider.addEventListener("input", () => {
+    const volume = volumeSlider.value;
+    audio.volume = volume; 
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+    const defaultVolume = 0.5;
+    audio.volume = defaultVolume;
+    volumeSlider.value = defaultVolume;
+});
+
+  </script>
+  
+    </body>
+</html>
+

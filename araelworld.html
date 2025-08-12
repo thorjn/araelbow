@@ -1,0 +1,151 @@
+<html lang="en">
+<head> 
+        <meta charset="utf-8">
+        <title>Arael World</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="siteimages/intface2.png"> 
+
+<style>
+html, body {
+margin: 0;
+padding: 0;
+background: black;
+color: rgb(50, 0, 108);
+font-family: monospace;
+overflow: hidden;
+width: 100vw;
+height: 100vh;
+}
+#matrix {
+font-size: 18px;
+line-height: 1;
+white-space: pre;
+width: 100%;
+height: 100%;
+font-family: monospace;
+    }
+#sizer {
+position: absolute;
+visibility: hidden;
+font-size: 18px;
+line-height: 1;
+font-family: monospace;
+}
+
+.back-button {
+position: fixed;
+top: 20px;
+left: 20px;
+color: #FFD94F;
+font-family: 'ttcw type', sans-serif;
+font-size: 20px;
+text-decoration: none;
+z-index: 1500;
+background-color: transparent;
+padding: 5px 10px;
+border: 2px solid #FFD94F;
+border-radius: 20px;
+opacity: 0.3;
+transition: background-color 0.3s, transform 0.2s;
+}
+
+.back-button:hover {
+background-color: rgba(255, 217, 79, 0.1);
+transform: scale(1.05);
+opacity: 1.0;
+cursor: pointer;
+}
+  
+</style>
+</head>
+
+<body>
+<a href="index.html" class="back-button">⬅</a>
+  <div id="matrix"></div>
+  <div id="sizer">M</div> 
+
+  <audio src="Audio/araelworldsound.mp3" autoplay loop hidden></audio>
+
+  <script>
+    const rawChars = "𑑉☽𑑑𑑇𖢛⧸𑀻_𑑁⧷𑑘𑑙⧻𑑏𑑎⧾⧙⧎⧌⧜⧧𑑗⧇⧲⧺༺𑁍༻𓂀凾𖣔𓂉𖣁𑀱大𑁀𐑀𐄬𐄷𖤏𖤓𑀬⨴⩰⧬𖡼⩷⨳𓅰⨟⨗⨕𖥔𐑂𓆣⨀␑✦⟡𐑄𐑋⠀𑁿𑁬𑀯𖠮𐑆𖡻𑀾𐑁𐑉𐑃𑀿𖠹𐑅⦿⢀⣀⡀⣴⠿⠛⠉⠻⣦⡀ARAELBOW⢠⡾⠁⢷⡀⣿⡤⠤⡇⠘⠿⠿⠟⠃⢸⡇⢰⡄⣠⣤⣼⠇⠹⣧⢿⣿⡿⣼⡟⠙⣦⣤⡾⠋⦿⨀␑⌖⌬⦾⌘⩙⦚⧁␑⦚⩘⩙␑⠿⢀⣀⢀⣀⡀⡀⣀⡀⣀⠘⡿⣷⡄⣴⣿⡿⢸⡇⢸⡇⣴⣿⡿⠃⠈⠻⠿⠟⠁⡀⠘⢿⢀⡿⠃⡀⠻⠿⠁⡀⣧⠈⢿⣀⣀⡿⠁⣼⢀⡀⣀⡀⠘⠿⠿⠃⠘⠿⠿⠃⠻⠿⠟⠁⡀⠤⠒⠉⠉⠑⠢⡀⣀⣀⣀⡀⡠⠔⠊⠉⠉⠉⠢⡀⢳⡀⣀⣀⣀⠹⡄⣜⠁⠈⡆⡜⠁⣀⣀⣀⢱⠑⠦⠉⠉⢹⢸⠠⠤⠔⡇⢠⠇⠉⠉⡜⠈⠑⠢⢄⡀⡜⢆⢠⡇⢸⢀⣀⠤⠒⠊⠉⠁⠑⠤⠜⠁";
+  
+    const matrix = document.getElementById('matrix');
+    const sizer = document.getElementById('sizer');
+  
+   
+    function isRenderable(char) {
+      const test = document.createElement("span");
+      test.style.visibility = "hidden";
+      test.style.fontFamily = "monospace";
+      test.textContent = char;
+      document.body.appendChild(test);
+  
+      const width = test.offsetWidth;
+      const height = test.offsetHeight;
+  
+    
+      test.textContent = "�";
+      const badWidth = test.offsetWidth;
+      const badHeight = test.offsetHeight;
+  
+      document.body.removeChild(test);
+  
+    
+      return !(width === badWidth && height === badHeight);
+    }
+  
+   
+    const chars = Array.from(rawChars).filter(isRenderable);
+  
+    let cols, rows;
+let mouseCol = -1;
+let mouseRow = -1;
+
+function getRandomChar() {
+  return chars[Math.floor(Math.random() * chars.length)];
+}
+
+function calculateGrid() {
+  const charWidth = sizer.offsetWidth;
+  const charHeight = sizer.offsetHeight;
+  cols = Math.floor(window.innerWidth / charWidth);
+  rows = Math.floor(window.innerHeight / charHeight);
+}
+
+function drawMatrix() {
+  let output = "";
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+     
+      if (Math.abs(x - mouseCol) <= 200 && Math.abs(y - mouseRow) <= 0.5) {
+        output += " ARAEL WORLD ";
+      } else {
+        output += getRandomChar();
+      }
+    }
+    output += "\n";
+  }
+  matrix.textContent = output;
+}
+
+function redraw() {
+  calculateGrid();
+  drawMatrix();
+}
+
+
+document.addEventListener('mousemove', (e) => {
+  const charWidth = sizer.offsetWidth;
+  const charHeight = sizer.offsetHeight;
+  mouseCol = Math.floor(e.clientX / charWidth);
+  mouseRow = Math.floor(e.clientY / charHeight);
+});
+
+redraw();
+setInterval(drawMatrix, 100);
+window.addEventListener('resize', redraw);
+
+  </script>
+  
+</body>
+</html>

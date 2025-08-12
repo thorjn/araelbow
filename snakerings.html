@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>𖤓 I: Snake Rings</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="siteimages/intface2.png"> 
+        
+<style> 
+
+body {
+background-color: black;
+margin: 0;
+padding: 0;
+position: relative;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+body::before {
+content: "";
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-image: url('siteimages/pagebg1.gif'); 
+background-size: cover;
+background-position: center;
+opacity: 0.2; 
+z-index: -1;
+}
+        
+@font-face {
+font-family: 'gismonda';
+src: url('Fonts/webfontkit-20250128-111642/gismonda-webfont.woff2') format('woff2'),
+url('Fonts/webfontkit-20250128-111642/gismonda-webfont.woff2') format('woff2');
+font-weight: normal; 
+font-style: normal; 
+}
+
+@font-face {
+font-family: 'drenn';
+src: url('Fonts/Drenn_s_Runes.woff2') format('woff2'),
+url('Fonts/Drenn_s_Runes.woff2') format('woff2');
+font-weight: normal; 
+font-style: normal; 
+}
+
+@font-face {
+font-family: 'ttcw type';
+src: url('Fonts/TTCWTEST4.woff2') format('woff2'),
+url('Fonts/TTCWTEST4.woff2') format('woff2');
+font-weight: normal; 
+font-style: normal;
+}
+
+@font-face {
+font-family: 'DAYROM';
+src: url('Fonts/DAYROM__.woff2') format('woff2'),
+url('Fonts/DAYROM__.woff2') format('woff2');
+font-weight: normal; 
+font-style: normal; 
+}
+
+.top-bar {
+position: fixed;   
+top: 0;       
+left: 0;           
+width: 100%;     
+height: 130px;     
+background: url('siteimages/topbarbg2.png') no-repeat center;
+background-size: 110% 110%; 
+display: flex;
+justify-content: center; 
+align-items: center;
+z-index: 1000;    
+}
+
+.top-title {
+color: #FFD94F;
+font-family: 'ttcw type';
+font-size: 32px;
+font-weight: bold;
+margin: 0;
+padding-bottom: 80px;
+text-shadow: 
+-1px -1px 0 #000,  
+1px -1px 0 #000,
+-1px  1px 0 #000,
+1px  1px 0 #000;
+}
+
+.center {
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 50%; 
+}
+
+.grid-container {
+display: grid;
+grid-template-columns: 33% 33% 33%;
+}
+
+.grid-container2 {
+display: grid;
+grid-template-columns: 50% 50%;
+}
+
+.image-container {
+position: relative; 
+width: 500px;
+height: 500px;
+}
+
+.background {
+width: 100%; 
+height: auto;
+display: block;
+}
+
+.snakeringsoverlay1 {
+position: absolute;
+top: 20px;  
+left: 50px;
+width: 100px; 
+height: auto;
+}
+
+.snakeringsoverlay2 {
+position: absolute;
+top: 320px;
+left: 50px;
+width: 100px;  
+height: auto;
+}
+
+.snakeringsoverlay3 {
+position: absolute;
+top: 620px;
+left: 50px;
+width: 100px; 
+height: auto;
+}
+
+.snakeringsoverlay4 {
+position: absolute;
+top: 20px;  
+left: 350px;
+width: 100px; 
+height: auto;
+}
+
+.snakeringsoverlay5 {
+position: absolute;
+top: 320px;
+left: 350px;
+width: 100px; 
+height: auto;
+}
+
+.snakeringsoverlay6 {
+position: absolute;
+top: 620px;
+left: 350px;
+width: 100px; 
+height: auto;
+}
+
+.text{
+text-align: center;
+font-family: 'DAYROM';
+}
+
+.rainbow-text {
+animation: rainbow 5s linear infinite;
+}
+
+@keyframes rainbow {
+  0%   { color: red; }
+  16%  { color: orange; }
+  33%  { color: yellow; }
+  50%  { color: rgb(0, 255, 0); }
+  66%  { color: rgb(0, 149, 255); }
+  83%  { color: rgb(174, 62, 255); }
+  100% { color: red; } 
+}
+
+.shadow {    
+text-shadow: 5px 5px 15px #000000;
+}
+       
+.audio-wrapper {
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 100px;
+background: url('siteimages/audiobarbg3.png') no-repeat center;
+background-size: 110% 110%; 
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 1000;
+}
+
+.audio-btn {
+font-size: 28px;
+background-color: transparent;
+border: none;
+color: #FFD94F;
+cursor: pointer;
+z-index: 1;
+transform: translateY(50px);
+-webkit-text-stroke: 2px black; 
+}
+
+.volume-container {
+position: absolute;
+right: 55px;
+bottom: 10px;
+}
+
+.volume-slider {
+width: 150px; 
+height: 6px;
+background: rgb(0, 0, 0);
+accent-color: #FFD94F;
+border: 1px solid black;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.volume-slider::-webkit-slider-thumb {
+background-color: #FFD94F; 
+border-radius: 50%;
+border: 2px solid #000;
+width: 20px;
+height: 20px;
+cursor: pointer;
+}
+
+.volume-slider:hover {
+background: rgb(0, 0, 0);
+}
+
+.sound-trigger {
+width: 200px;
+height: 200px;
+cursor: pointer;
+margin: 10px;
+}
+
+.popup-image {
+position: fixed; 
+left: -300px; 
+top: 50%; 
+transform: translateY(-50%); 
+width: 250px; 
+height: auto;
+opacity: 0;
+transition: left 0.5s ease-out, opacity 0.5s ease-out;
+z-index: 1000;
+}
+
+.popup-image.show {
+left: 50px; 
+opacity: 1;
+}
+
+.back-button {
+position: fixed;
+top: 20px;
+left: 20px;
+color: #FFD94F;
+font-family: 'ttcw type', sans-serif;
+font-size: 20px;
+text-decoration: none;
+z-index: 1500;
+background-color: transparent;
+padding: 5px 10px;
+border: 2px solid #FFD94F;
+border-radius: 20px;
+opacity: 0.3;
+transition: background-color 0.3s, transform 0.2s;
+}
+
+.back-button:hover {
+background-color: rgba(255, 217, 79, 0.1);
+transform: scale(1.05);
+opacity: 1.0;
+cursor: pointer;
+}
+
+
+</style>
+    
+</head>
+   
+<body>
+    
+    <div class="top-bar" id="topBar">
+    <h1 class="top-title">𖤓 i: snake rings</h1>
+    </div> 
+
+    <a href="index.html" class="back-button">⬅</a>
+
+    <div class="audio-wrapper" style="padding-bottom: 20px;"> 
+        <div class="audio-controls">
+            <div class="left-space"></div> 
+      
+      
+            <button id="playPauseBtn" class="audio-btn">❚❚</button>
+      
+          
+            <div class="volume-container">
+            
+                <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.01">
+            </div>
+        </div>
+    
+        <audio id="backgroundAudio" loop autoplay>
+            <source src="Audio/snakerings space1 loop.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    
+      
+      
+      
+       
+
+    <div class="grid-container" style="padding-top: 100px;">
+        <img src="siteimages/snakeringsHUDNEW1.gif"  alt="snakeringsgameHUD1" style="width:200px; height: 200px" class="center">
+        <img src="siteimages/snakeringsHUDNEW2.gif"  alt="snakeringsgameHUD2" style="width:200px; height: 200px" class="center">
+        <img src="siteimages/snakeringsHUDNEW3.gif"  alt="snakeringsgameHUD3" style="width:200px; height: 200px" class="center">
+    </div>
+
+    <pre style="color: #ffffff;" class="text center rainbow-text">
+╭────────────────╮   ⧗⧾⧖    ╭────────────────╮  
+│  ⎔⠿⠛⠛⠋⣠⡾⠦⣤⡀  │─⠦⢤⣄⡀─│  ⎔⠿⠛⠛⠋⣠⡾⠦⣤⡀  │  
+│  ⩙⧗⩘⣿⣷⣿⡇⠒⠢⠶⣽  │⠈⢤⡉⠛⢷⣾⡇⠀⠙⠿⡇⡀⠀⠈⠁  │  
+│  ⫷⧀⧁⣻⠟⠉⠀⠀⠀⠘⡿⢷⣤⣀⠈⠳⡄⣁⡤⠖⠆⠀⠀⠀⠀⠀⠀⣀│  
+╰────────────────╯   ⧖⧾⧖    ╰────────────────╯ 
+          
+What Lies Beyond The Frame
+    </pre>
+
+<div style="margin-left: 0px;margin-right:0px; background-image: url('siteimages/socialmediamatrix1 short.gif'); background-repeat: no-repeat;background-size: 100%;" class="grid-container">
+    <div>
+        <pre style="color: #ffffff;" class="text shadow">  
+        
+
+
+</pre>
+</div>
+    
+<div> 
+<pre style="color: #ffffff;" class="text shadow rainbow-text">         
+             
+You 𓁉 are,
+a slow spiral
+opal-formed in the ONYX INTERNET,
+the window tempts observation
+𓁊𓁉
+longing in costume
+𓁉𓁊𖤏
+A theatre of exit-doors and thresholdless air.
+move? speak? veil itself in texture?
+𓁉𓁊
+through flicker-screen and sleeping gaze?
+𓁉𐄬
+You do not see.
+You are convinced.
+Hold still your freedom.
+another loop, self-named,
+obstacle by design—
+a mirror of you drawn by your own fingers.
+Do you Pity (your) self
+in knowing, rooms
+
+⨀打破牆壁，“AGAIN”
+𓁊𓁉𖤏𓁉
+        
+        </div> 
+    
+        <div>
+            <pre style="color: #ffffff;" class="text shadow">
+     
+                
+            </pre>
+        </div>
+    </div> 
+
+<div style="padding: 20px;"></div>  
+
+<div class="grid-container2" style="padding-top: 20px;">
+    <pre style="color:#ffffff;text-align: left;font-size: xx-large;margin-left: 80px;" class="rainbow-text"> 
+    ╔════════════════════════════════╗
+    ║   ⨀⧫⨀              ⧗⧵⧶⧷⧹      │
+    ║     ⩶    ░▒▓█▓▒▓▒▓░▓▒▓▒▓▓▓▒▓▒ L_______________________________
+    ║   █▓▒▓▒░░▓▒▓▒▓▒▓▓▓░▓▒▒░▓▒▒▒░▒▒▓│
+    ║    ░▒▒▓▒▓░░▓▒▓▓▒▓▒▓▒░▓▒▒░▒▒▓▒▓▒│
+    ║   █▓▒░░socialmediasymbiont▓▓▓▓▒│
+    ║     ░▒▓▒▓▓▒▓▒░▒▓▒▓▓▓▒▒▒▓▒▒░░▓▓▒│
+    ║    █▓▒▓▒▓▓▓▒▒▒▒▓▓▒▓▓▓▓▓▓▓▒▒▒▒▒▒│
+    ║     ░▒▓▓▓▓▓▓▓▓▓▒▒▓▒▒▒▓▒▒▓▓▒▒▓▓▓│
+    ╚════════════════════════════════╝
+    </pre>
+    
+    <div>
+        <a href="https://youtu.be/IFUImrSF2i8">
+        <img src="siteimages/glibblespam.gif" style="width:300px;height: 300px;padding-top: 60px;" class="center"> 
+        </a>
+    </div>
+    
+</div>
+
+<div style="padding: 20px;"></div>
+
+<div class="grid-container2"> 
+    <pre style="color: #ffffff; font-size: large; margin-left: 20px;text-align: center;" class="rainbow-text">
+    
+    ╔═══════⨳═══𖤓══⩷══════╗  
+    ║                                                        ║  
+    ║   ☽⨁NEONXYLEM.𐄬𐄷𖤏𐄷𐄒𖤓 𝔹𝔼ℂ𝕆𝕄𝔼 𝕄𝔼𝕃𝔻𝕋𝔸ℙ𝔼𝕊𝕋ℝ𝕐  𐄢      ║  
+    ║   𝔹𝕃𝕆𝕆𝕄 𝐑.𝐎.𝐂.𝐸 𝐼𝔾ℕ𝐼𝕋𝐸 🌊 𝕆𝕍𝔼ℝ⫸ ⩷𝔻𝔼𝕊𝕋ℝ𝕌ℂ𝕋        ║  
+    ║   ⩷⨳𑁍𐄢  ⨐𖤛𖤛𖤛 PANEL STEPSTAINED ✧ EACH PETAL 𓆣       ║  
+    ║   ─────⧗𑀬⩷⧪⧲𖤓⧬⧶𑁋𖤓 𝕄𝕆ℝℙℋ𝕀ℂ ℙ𝕆ℝ𝕋𝔸𝕃         ║  
+    ║   ⨳ 𖡼 𖥔 𖡼 ⨳ SHIFT 💨 ONCE SHIFT ONCE SHIFT  ONCE          ║  
+    ║   𝕀𝕃𝕃𝕌𝕄𝕀ℕ𝔸𝕋𝔼 𝔸𝔻𝕍𝔸ℕℂ𝔼 ── 𝕃𝕆𝔾𝕀ℂ ── 𝕊𝕋𝔼𝔼𝕃          ║  
+    ║   COIL COIL COIL COIL COIL COIL ⨳ 🔄        ║  
+    ║   WORLD 🌍 𖤓 DATAALGOR SOUL𖤓SEA SCREENS ✺      ║  
+    ║   THE ARCHITECT 🌌 BETWEEN       ║  
+    ║   𝔽𝕃𝔼𝕊ℍ𝔹ℝ𝕀𝔻𝔾𝔼 ── ℙ𝔸ℕ𝔼𝕃ℂ𝕆𝔻𝔼 ✦ 𝕆ℙ𝕋𝕀ℂℍ𝔼𝔸ℝ𝕋       ║  
+    ║   ─────── ✺ FLOWTOUCHING PULSEMOMENT        ║  
+    ║                                                        ║  
+    ╚═══⨳════⩷═══════𖤓═══╝  
+
+<pre style="color:#ffffff;font-size: larger;" class="text rainbow-text">
+        
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⢀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡿⠛⠉⠉⠛⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⡇⠀⣀⣀⠀⢹⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠿⠾⠿⠿⠿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠛⠋⠀⠀⠀⠀⠙⠳⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+    ⠀⠀⠀⠀⠀⠀⠀⠀⢠⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+    ⠀⠀⠀⠀⠀⠀⠀⠀⣾⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡀⠀⠀⠀⠀⠀⠀⠀⠀  
+    ⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⢀⡀⠀⠀⠀⣀⠀⠀⠸⡇⠀⠀⠀⠀⠀⠀⠀⠀  
+    ⠀⠀⠀⠀⠀⠀⠀⠀⢿⡀⠀⣰⠋⠉⠳⣄⠀⠙⣦⠀⢠⡇⠀⠀⠀⠀⠀⠀⠀⠀  
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠘⣷⠀⢿⡀⠿⠿⠁⠀⢀⡿⠀⣼⠃⠀⠀⠀⠀⠀⠀⠀⠀  
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣦⡀⠙⠦⣤⡤⠖⠋⢀⣴⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⠶⢤⣀⣀⡤⠖⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+ </pre>
+        </pre>
+    
+    <div class="image-container">
+    <img src="siteimages/wobblesaur.gif" alt="wobblesaur" style="width:600px; height:855px;" class="center background">
+
+    <div>
+    <img src="siteimages/u1816862888_httpss.mj.runVB-EOVZR2NI_httpss.mj.runeX6OWSGGO0o_d0dd59ab-075d-44d5-a707-c0c48c2c7a48_2.png" style="width:200px; height:200px;" class="snakeringsoverlay1 sound-trigger" data-audio="Audio/araelbow page audio/ttcwnoteperc1.mp3">
+    </div>
+    <div>
+    <img src="siteimages/u1816862888_httpss.mj.runVB-EOVZR2NI_httpss.mj.runeX6OWSGGO0o_dc93a866-c175-45fc-aa4a-db8f8a2b25c7_0.png" style="width:200px; height:200px;" class="snakeringsoverlay4 sound-trigger" data-audio="Audio/araelbow page audio/ttcwnoteperc2.mp3">
+    </div>
+    <div>
+    <img src="siteimages/u1816862888_httpss.mj.runVB-EOVZR2NI_httpss.mj.runeX6OWSGGO0o_a3e0438f-bf1b-4d92-9565-9de0b2858289_3.png" style="width:200px; height:200px;" class="snakeringsoverlay2 sound-trigger" data-audio="Audio/araelbow page audio/ttcwnoteperc3.mp3">
+    </div>
+    <div>
+    <img src="siteimages/u1816862888_httpss.mj.runVB-EOVZR2NI_httpss.mj.runeX6OWSGGO0o_dc93a866-c175-45fc-aa4a-db8f8a2b25c7_1.png" style="width:200px; height:200px;" class="snakeringsoverlay5 sound-trigger" data-audio="Audio/araelbow page audio/ttcwnoteperc4.mp3">
+    </div>
+    <div>
+    <img src="siteimages/u1816862888_httpss.mj.runVB-EOVZR2NI_httpss.mj.runeX6OWSGGO0o_d0dd59ab-075d-44d5-a707-c0c48c2c7a48_0.png" style="width:200px; height:200px;" class="snakeringsoverlay3 sound-trigger" data-audio="Audio/araelbow page audio/ttcwnoteperc5.mp3">
+    </div>
+    <div>
+    <img src="siteimages/u1816862888_httpss.mj.runVB-EOVZR2NI_httpss.mj.runeX6OWSGGO0o_a3e0438f-bf1b-4d92-9565-9de0b2858289_1.png" style="width:200px; height:200px;" class="snakeringsoverlay6 sound-trigger" data-audio="Audio/araelbow page audio/ttcwnoteperc6.mp3">
+    </div>
+
+    <audio id="audioPlayer">
+        <source id="audioSource" src="" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    </div>
+    
+        
+</div>
+
+<div class="grid-container">
+<pre style="text-align: center;font-size: large;font-family: 'gismonda';" class="rainbow-text">
+╔═══════════════╗  
+║  ⧉  ⌖  ⧉   ⌬  ⦾  ⦿   ⧉  ⌖  ⧉  ║  
+║  ⌘  ⟏  ⌘   butterfly   ⌘  ⟏  ⌘  ║  
+║  ⦚  ⩘  ⦚   ⧀  ⦿  ⧁   ⦚  ⩘  ⦚  ║  
+╚════════════════╝  
+🪞🪞🪞🪞🪞
+🪞🪞🪞🪞
+🪞🪞
+
+🦋👁🦋
+    
+</pre>
+<div>
+    <img src="siteimages/butterfly of paradise test1.gif" class="center click-only" style="width: 300px; height: 300px;padding-bottom: 50px;" 
+    data-audio="Audio/araelbow page audio/butterflybirdcall2.mp3" 
+    data-popup="popupImage2">
+    <img id="popupImage2" 
+             src="siteimages/butterflyinspirational.jpg" 
+             alt="butterflyinspiration" 
+             class="popup-image">
+</div>
+<pre style="text-align: center;font-size: large;font-family: 'gismonda';" class="rainbow-text">
+╔════════════════╗  
+║  ⧉  ⌖  ⧉   ⌬  ⦾  ⦿   ⧉  ⌖  ⧉  ║  
+║  ⌘  ⟏  ⌘   suntrails   ⌘  ⟏  ⌘  ║  
+║  ⦚  ⩘  ⦚   ⧀  ⦿  ⧁   ⦚  ⩘  ⦚  ║  
+╚══════════════╝  
+🪞🪞🪞🪞🪞
+🪞🪞🪞🪞
+🪞🪞
+
+🦋👁🦋
+    
+</pre>
+</div>
+
+<div style="margin-left: 0px;margin-right:0px; background-image: url('siteimages/Temple Melt 3.gif'); background-repeat:no-repeat; background-size:100%;" class="grid-container">
+
+        
+    <div>
+    <pre style="color: #000000;font-size: medium;">
+       
+        
+                      
+    </pre>
+    </div> 
+    <div>
+        <pre style="color: #000000;font-size: medium;" class="text rainbow-text">
+       
+            
+
+
+
+
+
+
+
+
+
+
+
+            
+            
+            
+
+
+
+
+
+
+
+            The wind ꧂ crest upon a ꧂
+            
+
+
+
+
+
+
+
+
+            
+
+            
+            
+       
+
+
+
+
+
+
+
+            
+            
+            
+                          
+        </pre>
+        
+    </div>
+    <div>
+        <pre style="color: #000000;font-size: medium;">
+       
+            
+                          
+        </pre>
+    </div> 
+</div> 
+
+<div style="padding-top: 20px;padding-bottom: 20px;"></div>
+
+<div>
+    <pre style="color: #ffffff;" class="text rainbow-text">
+        ╔══════════════════════════════════════╗  
+        ║ ꧁⎃𖠮𐑋𐑄𖡼     𐑉 𝒞𝓎𝒸𝓁𝑒 𐑉    𓆣  ║  
+        ╚═════════════════════════════════════
+        ⪀⧞⠃⠀⠀⠀⠀⠀⣀⣀⣠⠤⠤⠤⠤⣤⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+        ⩵⡿⠛⠓⠒⠦⠤⠤⢤⣭⣽⡻⠿⠛⠛⠛⢛⠿⠿⣷⣶⣤⣄⠀⠀⠀⠀⠀⠀  
+        ⩸⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠒⠚⠒⠉⠀⠀⠀⠀⠙⠻⣷⣦⠀⠀⠀  
+        ⢸⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⢻⣇⠀⠀  
+        ⠸⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡄⠀  
+        ⠀⢿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁  
+        ⠀⠈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        
+        ⟢⩭⣿⣷⣶⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+        ⣿⣾⣽⣇⠠⣠⣀⡉⠛⢦⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+        ⠈⠁⠀⠀⠀⠀⠀⠈⠳⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣶⠄⠀⠀
+                
+
+    ⩫⨀⩎⨸⟿⩹⩆⨋⩧⨾⟜⩮⨕⩤⩶⩀⨸⩯⩘⩵⨊⩳⩣⩧⩖⩍⩶⨁⩲⨥⩯⨼⩚⩄⩠⨐⟲⩣⩏⨡⨜⩾⩉⟦⩭⨅⩗⩢⟤⩣⩉⟝⩬⩌⩃⩧⩆⩺⩕⨵⩕⩥⩚⩙⩲⨄⩯⩨⨺⩚⨩⩪⨵⩞⩴⩶⩋⨴⨊⩷⩙
+    ⩨⩻⩭⩵⨞⩰⩾⩤⩒⩗⩠⩡⩛⩼⩙⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮
+    ⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟
+    ⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞
+    ⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮
+    ⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾
+    ⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮⩟⩂⩞⩸⩰⩮⩁⩭⩾⩘⩋⩜⩢⩩⩡⩳⩮
+    </pre>
+</div>
+
+    <div style="margin-left: 0px;margin-right:0px; background-image: url('siteimages/embryonicneon2.gif');background-repeat: no-repeat;background-size: 100%;" class="grid-container2">
+        <pre style="color: #ffffff;" class="rainbow-text">
+        ┌───────────────────────────────────────────────────────────────────────────┐
+        │                              𖤓 呼: 蛇環之夢                                      
+        │   ┌───────────────┐      ┌─────────────────┐      ┌───────────────┐               
+        │   │   🔥   🔥   🔥 │      │ ⛓️     ⛓️     ⛓️ │      │ 🌳   🌳   🌳   │       
+        │   │   ⛓️   ⛓️   ⛓️ │      │ 🌲     🌲     🌲 │      │ 🌲   🌲   🌲   │       
+        │   │   🔥   🔥   🔥 │      └─────────────────┘      └───────────────┘      
+        │   └───────────────┘                                                       
+        │    透過窗戶，看見水晶樹木。                                                   
+        │    水晶天空盒，水觸及空氣的四周。                                              
+        │    哦如此溫柔                                                               
+        │                                                                           
+        │      
+        │    ⧫ Cz⨀ sm⧵x⧭cy n⧲ae’x e⧴opicivn     “夢的回聲，”                    
+        │     ⧬⨴ u⧱rilmj.                        ⧫⨀⧷在非字母語中解開。           
+        │     Nhc nft llpgerd.                  └────────────────────────────────┘ 
+        │     ⧫⧲ Ireeifene:                  
+        │     ⧵ E⧴⧭ dv⧷⧱pad, ehv⧩ri hr⨀s eo 
+        │     ⧬ p⧭stnk my k⧴iqp n⧳hice rr⧱i 
+        │     ⧴⧭⧴ anaop. T⧬⧱llt t⧱mxe n⧴ig 
+        │   └─────────────────────────────────┘   ┌───────────────────────────────┐ 
+        │    美學虛無                               ⧫⨳⨘                               
+        │    模式形成，衰退於                           ⨀打破牆壁，“AGAIN” 每次重複是        
+        │    迷亂的紋理。                               ⧵的回聲。逃脫，                    
+        │    在混亂中反射，                             一條虛假的道路，自我施加的         
+        │    無聲的啟示。                               邊界，未來是絕對的。              
+        │                              │    ┌───────────────────────────────┐ 
+        │                              │    │  存在的轉變                        
+        │                              │    │  ⨀狀態，行業和超越的循環。          
+        │                              │    │  蝴蝶階段：根部、橢圓、蛹與退出。  
+        │                              │    └───────────────────────────────┘ 
+        │                              │    ┌───────────────────────────────┐ 
+        │                              │    │  鏡像流                            
+        │                              │    │  ⧫展開：                          
+        │                              │    │  神的死屍，千個投射。實體           
+        │                              │    │  宣稱神性，數位神。               
+        │                              │    └───────────────────────────────┘ 
+        │                              │    ┌───────────────────────────────┐ 
+        │                              │    │  最終流動                          
+        │                              │    │  演化舞蹈，循環，創造與破壞。       
+        │                              │    │  看不見的路徑，不斷變化。           
+        │                              │    └───────────────────────────────┘
+        </pre>
+        <div class="image-container"> 
+            
+            <img src="siteimages/u1816862888_httpss.mj.runzU4cZ4Bsn5Q_httpss.mj.runDW7UQmac_XQ_b30b5e99-c139-4e7e-aa20-51bf7db27247_3.png" alt="manorpilled" style="width:600px; height:700px;padding-top: 20px;" 
+                 class="center background click-only" data-audio="Audio/araelbow page audio/Bell Clank 2.mp3" data-popup="popupImage1">
+            
+            <img id="popupImage1" src="siteimages/moss3.jpg" alt="moss" class="popup-image" style="width:350px; height:auto;">
+        </div>
+        
+        
+        <audio id="audioPlayer">
+            <source id="audioSource" src="" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        </div>
+
+        <div style="margin-left: 80px;margin-right:80px;" class="grid-container">
+   
+            <pre style="color: #ffffff;" class="text rainbow-text"> 
+            ⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀🪞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠃⠀⠀⠀⠀⠀⠀⠀⠃⠀⠀⠀⠀🪞⠀⠀⠀
+            ⠉⠀⠀⠀⠀⠀⠀⠀⠋🪞⠀⠀⠀⠀⠀⠀⠀⠋⠀⠀⠀⠀⠀⠀⠀⠙⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠋⠀⠑⠀⠙
+            ⠒⠂⠈⠈⠋⠀⠈⠀⠉⠀⠀⠀⠋⠀⠙⠀⠀⠀⠉⠀⠀⠀⠀⠀⠁⠀⠀⠀⠉⠀⠁🪞⠀⠀⠀⠉⠙⠀⠀⠀⠀⠀⠋⠉
+            ⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀🪞⠁⠀⠀⠀⠀⠀⠀⠀⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠋⠀⠀⠀⠀⠀⠉⠀⠉⠀⠀
+            ⠀⠀⠉⠁⠀🪞⠀⠀⠀⠀⠀⠀⠀⠃⠀⠀⠀⠀⠀🪞⠙⠛⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠀⠀⠀⠁⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉
+            ⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠃⠀⠀⠀⠀⠀⠀⠀⠃
+            ⠉⠀⠀⠀⠀⠀⠀🪞⠀⠋⠀⠀⠀⠀⠀⠀⠀⠋⠀⠀⠀⠀⠀⠀⠀⠙⠀⠀⠀⠉⠀⠀⠀⠀
+            ⠒⠂⠈⠈⠋⠀⠈⠀⠉⠀⠀⠀⠋⠀⠙⠀⠀⠀⠉⠀🪞⠀⠀⠀⠀⠁⠀⠀⠀⠉🪞⠀⠁
+            ⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠋🪞
+            ⠀⠀⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠃⠀⠀⠀⠀🪞⠀⠙⠛⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉
+            ⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉
+            </pre>
+        
+             <pre style="color: #ffffff;" class="text rainbow-text">   
+            ⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠃⠀⠀⠀⠀⠀
+            ⠉⠀⠀⠀⠀🪞⠀⠀⠀⠋⠀⠀⠀⠀⠀⠀⠀⠋⠀⠀⠀⠀⠀⠀⠀🪞⠙⠀⠀⠀⠉
+            ⠒⠂⠈⠈⠋⠀⠈⠀⠉⠀⠀⠀⠋⠀⠙⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀🪞⠀⠀⠋⠉
+            ⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀🪞⠀⠀⠀⠀⠋⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠉⠁⠀⠀⠀⠀⠀⠀🪞⠀⠀⠃⠀⠀⠀⠀⠀⠀⠁🪞⠀⠀⠀⠀⠀⠀
+            ╔══════════════════╗
+            ║ ⧗ Onyx Internet ⧖  ║
+            ╚══════════════════╝  
+    
+            ⠉⠀⠀⠀⠀⠀⠀⠀⠋🪞⠀⠀⠀⠀⠀⠀⠀⠋⠀⠀⠀⠀⠀⠀⠀⠙⠀⠀⠀
+            ⠒⠂⠈⠈⠋⠁🪞⠀⠀⠀⠉⠙⠀⠀⠀⠀⠀⠋
+            ⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀🪞⠁⠀⠀⠀⠀⠀⠀⠀⠋⠀⠀
+            ⠀⠀⠉⠁⠀🪞⠀⠀⠀⠀⠀⠀⠀⠃⠀⠀⠀⠀⠀🪞⠙⠛⠉⠉⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉   
+            </pre> 
+    
+            <pre style="color: #ffffff;" class="text rainbow-text">
+            ⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠃⠀
+            ⠉⠀⠀⠀⠀⠀⠀🪞⠀⠋⠀⠀⠀⠀⠀⠀⠀⠋⠀⠀⠀⠀⠀⠀⠀⠙⠀
+            ⠒⠂⠈⠈⠋⠀⠈⠀⠉⠀⠀⠀⠋⠀⠙⠀⠀⠀⠉⠀🪞⠀⠀⠀⠀⠉🪞
+            ⠀⠀⠁⠀⠀⠀⠀🪞⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠋⠀⠀⠀⠀⠀
+            ⠀⠀⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠃⠀⠀⠀⠀🪞⠀⠙⠛⠉⠉⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉
+            ⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠃⠀
+            ⠉⠀⠀⠀⠀🪞⠀⠀⠀⠋⠀⠀⠀⠀⠀⠀⠀⠋⠀⠀⠀⠀⠀⠀⠀🪞⠙
+            ⠒⠂⠈⠈⠋⠀⠈⠀⠉⠀⠀⠀⠋⠀⠙⠀⠀⠀⠉⠀⠀⠀⠀⠀⠁⠀⠀⠀
+            ⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀🪞⠀⠀⠀⠀⠋⠀⠀⠀⠀⠀
+            ⠀⠀⠉⠁⠀⠀⠀⠀⠀⠀🪞⠀⠀⠃⠀⠀⠀⠀⠀⠙⠛⠉⠉⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀🪞⠉     
+            </pre>
+              
+    </div>
+
+<div style="padding-top: 20px;"></div>
+
+<div class="grid-container" style="background-image: url('siteimages/marioland shorter.gif');background-repeat: no-repeat;background-size: 100%; margin-left: 0px;margin-right: 0px;">
+    <pre style="color: #ffffff;font-size: larger;" class="text rainbow-text">
+       
+        
+
+        
+        ⠶⠶⠶⠒⠤⠤⠒⠶⠶⠶
+        ⠤⠤⠄⠂⠁⠁⠂⠄⠤⠤
+        ⠒⠒⠂⠁⠄⠄⠁⠂⠒⠒
+        ⠤⠂⠁⠄⠂⠂⠄⠁⠂⠤
+        ⠶⠄⠂⠁⠄⠄⠁⠂⠄⠶
+        ⠤⠂⠁⠄⠂⠂⠄⠁⠂⠤
+        ⠒⠒⠂⠁⠄⠄⠁⠂⠒⠒
+        ⠤⠤⠄⠂⠁⠁⠂⠄⠤⠤
+        ⠶⠶⠶⠒⠤⠤⠒⠶⠶⠶
+
+
+    </pre>
+    <pre style="color: #ffffff;font-size: larger;" class="text rainbow-text">
+     
+      
+        ⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀  
+        ⠀⠀⠀⠀⠀⢀⣴⣿⡿⠿⠛⠉⠉⠉⠙⠻⢷⣄⠀⠀⠀⠀⠀  
+        ⠀⠀⠀⢀⣴⣿⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠈⢷⡀⠀⠀⠀⠀  
+        ⠀⠀⢀⣾⣿⡟⠀⠀⣀⣀⣀⣀⣀⣀⡀⠀⠀⠘⣷⠀⠀⠀⠀  
+        ⠀⠀⣼⣿⡟⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠘⣿⡀⠀⠀⠀  
+        ⠀⢰⣿⣿⠁⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⣿⣧⠀⠀⠀  
+        ⠀⣿⣿⡇⠀⣿⣿⣿⡿⠿⠿⠿⢿⣿⣿⣿⡇⢀⣿⣿⠀⠀⠀  
+        ⠀⣿⣿⡇⠀⣿⣿⠃⠀⠀⠀⠀⠀⠘⣿⣿⡇⢸⣿⣿⠀⠀⠀  
+        ⠀⢿⣿⡇⠀⣿⡟⠀⠀⠀⠀⠀⠀⠀⢻⣿⡇⢸⣿⡿⠀⠀⠀  
+        ⠀⠘⣿⡇⠀⠿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠿⠃⢸⣿⠃⠀⠀⠀  
+        ⠀⠀⢻⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡟⠀⠀⠀⠀  
+        ⠀⠀⠘⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠃⠀⠀⠀⠀  
+        ⠀⠀⠀⠹⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠏⠀⠀⠀⠀⠀  
+        ⠀⠀⠀⠀⠙⠿⣶⣤⣄⣀⣀⣠⣤⣶⠿⠋⠀⠀⠀⠀⠀⠀  
+
+
+    </pre>
+    <pre style="color: #ffffff;font-size: larger;" class="text rainbow-text">
+        
+      
+        
+
+        ⠶⠶⠶⠒⠤⠤⠒⠶⠶⠶
+        ⠤⠤⠄⠂⠁⠁⠂⠄⠤⠤
+        ⠒⠒⠂⠁⠄⠄⠁⠂⠒⠒
+        ⠤⠂⠁⠄⠂⠂⠄⠁⠂⠤
+        ⠶⠄⠂⠁⠄⠄⠁⠂⠄⠶
+        ⠤⠂⠁⠄⠂⠂⠄⠁⠂⠤
+        ⠒⠒⠂⠁⠄⠄⠁⠂⠒⠒
+        ⠤⠤⠄⠂⠁⠁⠂⠄⠤⠤
+        ⠶⠶⠶⠒⠤⠤⠒⠶⠶⠶
+
+
+    </pre>
+</div>
+
+<div>
+    <pre style="color: #ffffff;text-align: justify;" >
+
+
+    </pre>
+       
+</div>
+
+<div class="grid-container2"> 
+
+    <div class="image-container">
+        <img src="siteimages/websitegen2.gif" alt="meltedtemples" style="width:600px; height:855px;" class="center background">
+    <div>
+        <img src="siteimages/u1816862888_httpss.mj.runzU4cZ4Bsn5Q_httpss.mj.runDW7UQmac_XQ_cc026eb8-f0d5-4d47-b534-fafb743b9a16_2.png" style="width:200px; height:200px;" class="snakeringsoverlay1 sound-trigger" data-audio="Audio/araelbow page audio/shieldslam.mp3">
+    </div>
+    <div>
+        <img src="siteimages/u1816862888_httpss.mj.runzU4cZ4Bsn5Q_httpss.mj.runDW7UQmac_XQ_cc026eb8-f0d5-4d47-b534-fafb743b9a16_0.png" style="width:200px; height:200px;" class="snakeringsoverlay2 sound-trigger" data-audio="Audio/araelbow page audio/lossybirds.mp3">
+    </div>
+    <div>
+        <img src="siteimages/u1816862888_httpss.mj.runzU4cZ4Bsn5Q_httpss.mj.runDW7UQmac_XQ_13a96164-4f15-4f0b-a23c-3f214dd7b6b9_1.png" style="width:200px; height:200px;" class="snakeringsoverlay3 sound-trigger" data-audio="Audio/araelbow page audio/bloodghost.mp3">
+    </div>
+    
+    <audio id="audioPlayer">
+        <source id="audioSource" src="" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    </div>
+
+    <pre style="color: #ffffff; font-family:drenn; margin-left: 20px;text-align: justify;" class="rainbow-text">
+    
+╔═══════⨳═══𖤓══⩷═════𖤓════════╗  
+║                              
+║   ╭──────────────────────────╮
+║   │ r34ch m🌀r ✩ whɪspᴇr𝒾ng b𝑒yond c🌌rds ⧫ ntegr8 ⨳ 
+║       sml3ss 
+║       dnc    │
+║       nw ln frctl-lght f🐚rm 𝒆dg, bl33d🥀ng 
+║       frctls...mph3d  │
+║       ⩻𝓒𝒐mp🌀unds 🦋n mtn fll frgmnts                              
+║       mlcl trnss, brkng n fllngshif💠                            
+║       crvs wndng, npltrvrsbl spltrs hrtbl prsshs                             
+║       flwdntsbrk~mnchdngmvn⩳ sldngnfrmdnts                                  
+║       twksmtchngstrtfrmdws ☯ l𝒶tnttchsψ                                    
+║  
+║                                         
+╚═══⨳════⩷════⩷══⩷═════════𖤓═══╝  
+
+<pre style="color:#ffffff;font-size: larger;" class="text rainbow-text">
+    ⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡿⠛⠛⠿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⡇⠀⠀⠀⠈⠙⢿⡀⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⢀⣤⣤⠘⣿⡄⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠈⠻⠿⠿⢇⣧⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣧⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⠀⠀⠀⠀⠀⠀⠀⢸⣿⠋⠀⠀⠀⠀⠀⠀  
+𝒲heel edges 𝑆𝒸hᵘᴛᴇrs form diagonals woven together uncall
+t3xt strea𝓂 ᶜ⧴ shifting ♥  hold  code,
+earth entwined shape𝒶spect  ↯ trac3s un cos
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⡟⢿⣿⣿⣿⣿⣿⣿⠆⠀⠇⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⣸⣿⡇⠀⠙⠛⠛⠛⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⢠⡿⠁⠀⠀⠀⠀⠀⠠⢤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠿⣶⡄⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠘⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠳⠦⠤⠤⢤⡀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⠿⠤⠴⠒⠒⠒⠛⠛⠒⠦⠤⠤⠤⠤⠄⠀     
+ </pre>
+        </pre>       
+</div>
+
+
+
+<div class="grid-container" style="background-image: url('');background-repeat: no-repeat;background-size: 100%; margin-left: 40px; margin-right: 40px;">
+    <pre class="text rainbow-text" style="color: #ffffff;font-size: large;"> 
+╔═════════════╗
+║   ⧻ ⩘⦚⩙⩘ ⧶   ║
+╚═════════════╝⠀
+▚⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+╔══════════════════╗
+║ ⧗⧷⣿⣿⣶⣶⣦⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+╚══════════════════╝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡿⠛⠉⠉⠛⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⡇⠀⣀⣀⠀⢹⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠿⠾⠿⠿⠿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠛⠋⠀⠀⠀⠀⠙⠳⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⢠⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⣾⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡀⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⢀⡀⠀⠀⠀⣀⠀⠀⠸⡇⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⢿⡀⠀⣰⠋⠉⠳⣄⠀⠙⣦⠀⢠⡇⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⠘⣷⠀⢿⡀⠿⠿⠁⠀⢀⡿⠀⣼⠃⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣦⡀⠙⠦⣤⡤⠖⠋⢀⣴⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⠶⢤⣀⣀⡤⠖⠋⠀⠀⠀⠀⠀⠀⠀⠀
+    </pre>
+
+    <div>
+        <a href="https://youtu.be/MiCCiW-pyHM?si=Mt4ZENiwHC5NZLI8">
+        <img src="siteimages/butterflydigital1.gif" 
+             alt="butterflydigital1" 
+             class="center" 
+             style="width: 400px; height: 400px;padding-top: 80px;"> 
+        </a>
+    
+      </div>
+    
+    
+    <pre class="text rainbow-text" style="color: #ffffff;font-size: large;">
+
+╒══════════════════╕
+│ ⧲⧿ 𝓡𝓮𝓼𝓮𝓻𝓿𝓮 ⧿⧳ │
+╘══════════════════╛
+▌⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+╒════════════════╕
+│ ⩸⢸⣾⡿⠛⠿⣿⣿⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+╘════════════════╛⠀⠀
+⠀⢀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⠛⠳⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣷⣄⠀⠀⠙⠳⢤⡀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⠟⠛⠛⢻⣷⣦⡀⠀⠀⠀⠈⠙⢷⡄⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⠿⠋⠀⠀⠀⢀⣿⡿⢿⡇⠀⠀⠀⠀⠀⢹⡇⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠘⠛⠛⠃⠀⠀⠀⠀⢸⣿⣧⣸⠁⠀⠀⠀⠀⠀⢸⡇⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠋⠁⠀⠀⠀⠀⠀⠀⠈⠇⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣤⣤⠤⠤⢄⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⠿⠛⠛⠻⢦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣧⣤⣤⣤⡶⢻⣿⣧⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠁⠀⠸⣿⣧⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⣆⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠳⣄⠀⠀⠀
+    </pre>
+</div>
+
+<div style="margin-left: 0px;margin-right:0px; background-image: url('siteimages/TempleFunk.gif'); background-repeat:no-repeat; background-size:100%;" class="grid-container">
+
+        
+    <div>
+    <pre style="color: #ffffff;font-size: medium;" class="rainbow-text">
+       
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣴⠾⠛⠋⠉⠉⠉⠉⠉⠉⠙⠻⢷⣄⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣦⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡾⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣦⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⡿⠁⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣆
+        ⠀⠀⠀⠀⠀⠀⠀⣠⣴⣿⡿⠁⠀⠀⠀⣠⣴⣾⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹
+        ⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⠀⠀⢠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⠀⠀⠸⠿⠟⠛⠻⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⣿⣿⣿⣿⣿⣿⣿⣦⣄⡀⠀⠀⠀⠀
+        ⠀⣴⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⠿⠿⠿⠿⠿⣿⣿⣿⣦⡀⠀⠀
+        ⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠿⠿⠷⣄⠀
+        ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻
+        ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠙⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠟⠀⠀
+    
+        
+        ⠀⠀⠀⢀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣠⡀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⣾⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠴⠛⠉⢁⡀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠘⠛⠿⣦⣀⣀⠀⠀⠀⠀⠀⠈⠁⠀⠀⠀⠘⣇⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠛⠻⢶⣶⡦⠤⠤⢄⡀⠀⠀⠀⢸⠂⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠂⠤⠤⠶⠤⠤⢤⣴⠛⠲⢦⣀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢻⣦⣀⣀⠀⠀⠀⠈⠳⣄⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠻⠿⠤⣄⣀⠙⢶⡀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⢳⠸⡇
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡞⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⡼⠁⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⡾⠁⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣠⡤⠖⠋⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠛⠛⠿⠶⢶⣦⡀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⡆⠀⠀⠈⠙⢿⣦⡀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⠀⠀⠀⠀⠀⠈⠳⡄
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠁⠀⠀⠀⠀⠀⠀⢻
+
+
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣴⠾⠛⠋⠉⠉⠉⠉⠉⠉⠙⠻⢷⣄⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣦⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡾⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣦⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⡿⠁⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣆
+        ⠀⠀⠀⠀⠀⠀⠀⣠⣴⣿⡿⠁⠀⠀⠀⣠⣴⣾⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹
+        ⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⠀⠀⢠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⠀⠀⠸⠿⠟⠛⠻⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⣿⣿⣿⣿⣿⣿⣿⣦⣄⡀⠀⠀⠀⠀
+        ⠀⣴⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⠿⠿⠿⠿⠿⣿⣿⣿⣦⡀⠀⠀
+        ⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠿⠿⠷⣄⠀
+        ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻
+        ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠙⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠟⠀⠀
+                      
+    </pre>
+    </div> 
+    <div>
+        <pre style="color: #ffffff;font-size: medium;text-align: center;" class="text rainbow-text">
+
+Look through the Window, 
+
+"So gentle"
+                
+Trees made of crystal. 
+                             
+"Upon the Woods, 
+                
+their ꧁Wings꧂ stutter 
+                
+and slide"
+                               
+Crystalskybox, 
+                
+The Waters Fingers reach between 
+
+
+wake up april.  
+
+gliding INTERFACE, 
+
+visual R.O.C.E.
+                
+The first pane alights. 
+    
+             
+🐍 A coiled vortex collapses into arael,
+
+hollowed pathwords—
+
+estranged unlanguage
+
+Gates unopen
+
+unraveled   
+
+
+🜃 Traceries unfire, shadow flicker 
+
+a glimmerless blaze.
+
+color, its ghost.
+
+ghost, its footprint.
+
+
+A godless butterfly in reverse,
+ 
+carrying no birth on its wings,
+   
+the idea of birth
+    
+—withered and whole.
+        </pre>
+        
+    </div>
+    <div>
+        <pre style="color: #ffffff;font-size: medium;" class="rainbow-text">
+       
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣴⠾⠛⠋⠉⠉⠉⠉⠉⠉⠙⠻⢷⣄⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣦⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡾⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣦⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⡿⠁⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣆
+            ⠀⠀⠀⠀⠀⠀⠀⣠⣴⣿⡿⠁⠀⠀⠀⣠⣴⣾⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹
+            ⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⠀⠀⢠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⠀⠀⠸⠿⠟⠛⠻⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⣿⣿⣿⣿⣿⣿⣿⣦⣄⡀⠀⠀⠀⠀
+            ⠀⣴⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⠿⠿⠿⠿⠿⣿⣿⣿⣦⡀⠀⠀
+            ⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠿⠿⠷⣄⠀
+            ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻
+            ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠙⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠟⠀⠀
+        
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡿⠿⠶⠦⠴⢤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+            ⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⠁⠀⠀⠀⠀⠀⠈⢷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+            ⠀⠀⠀⠀⠀⠀⠀⢀⣸⡇⠀⠀⢀⣤⣤⡄⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+            ⠀⠀⠀⠀⠀⠀⠀⢸⣿⡇⠀⠀⠸⠿⠿⠇⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+            ⠀⠀⠀⠀⠀⠀⠀⠘⢿⣷⡀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⣶⡄⠀⠀⠀⣀⣸⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⢿⡀⠀⣾⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣠⡿⠤⠴⠒⠒⠒⠒⠤⠤⡄⠀⠀⠀  
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢛⣛⣶⣶⣤⣄⡀⠀⠀⠀⠀⠀⠀  
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⡿⡿⢿⡛⠛⢦⡀⠀⠀⠀⠀  
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⢛⣿⠿⢿⠏⠀⠀⠀⢀⣀⡠⠀⠀⠀  
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣿⠿⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠛⠲⠶⠶⠤⢤⣤⠤⠤⠤⠄⠀⠀⠀
+
+    
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣴⠾⠛⠋⠉⠉⠉⠉⠉⠉⠙⠻⢷⣄⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣦⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡾⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣦⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⡿⠁⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣆
+            ⠀⠀⠀⠀⠀⠀⠀⣠⣴⣿⡿⠁⠀⠀⠀⣠⣴⣾⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹
+            ⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⠀⠀⢠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⠀⠀⠸⠿⠟⠛⠻⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⣿⣿⣿⣿⣿⣿⣿⣦⣄⡀⠀⠀⠀⠀
+            ⠀⣴⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⠿⠿⠿⠿⠿⣿⣿⣿⣦⡀⠀⠀
+            ⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠿⠿⠷⣄⠀
+            ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻
+            ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠙⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠟⠀⠀
+                          
+        </pre>
+    </div> 
+</div> 
+
+<div> 
+<pre>
+
+
+
+
+
+</pre>
+</div>
+<script>
+    
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const audioBuffers = {};
+  
+    async function loadAudio(url) {
+      if (audioBuffers[url]) return audioBuffers[url];
+      const response = await fetch(url);
+      const arrayBuffer = await response.arrayBuffer();
+      const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+      audioBuffers[url] = audioBuffer;
+      return audioBuffer;
+    }
+  
+    async function playSound(url) {
+      const buffer = await loadAudio(url);
+      const source = audioContext.createBufferSource();
+      source.buffer = buffer;
+      source.connect(audioContext.destination);
+      source.start(0);
+    }
+  
+  
+    function setupAudioImageClicks(selector) {
+      document.querySelectorAll(selector).forEach(img => {
+        img.addEventListener("click", async function () {
+          const soundFile = this.getAttribute("data-audio");
+          const popupId = this.getAttribute("data-popup");
+          const popupImage = popupId ? document.getElementById(popupId) : null;
+  
+        
+          if (soundFile) playSound(soundFile);
+  
+         
+          this.style.transform = "scale(0.95)";
+          this.style.transition = "transform 0.08s ease-out";
+          setTimeout(() => {
+            this.style.transform = "scale(1)";
+          }, 100);
+  
+         
+          if (popupImage) {
+            popupImage.classList.add("show");
+            setTimeout(() => {
+              popupImage.classList.remove("show");
+            }, 2500);
+          }
+        });
+      });
+    }
+  
+   
+    setupAudioImageClicks('.click-only');
+    setupAudioImageClicks('.sound-trigger');
+
+   
+const audio = document.getElementById("backgroundAudio");
+const playPauseBtn = document.getElementById("playPauseBtn");
+const volumeSlider = document.getElementById("volumeSlider");
+
+
+playPauseBtn.textContent = "❚❚";
+
+
+playPauseBtn.addEventListener("click", () => {
+    if (audio.paused) {
+        audio.play();
+        playPauseBtn.textContent = "❚❚"; 
+    } else {
+        audio.pause();
+        playPauseBtn.textContent = "►"; 
+    }
+});
+
+
+volumeSlider.addEventListener("input", () => {
+    const volume = volumeSlider.value;
+    audio.volume = volume; 
+});
+
+
+window.addEventListener("DOMContentLoaded", () => {
+    const defaultVolume = 0.5;
+    audio.volume = defaultVolume;
+    volumeSlider.value = defaultVolume;
+});
+
+
+
+
+    
+
+
+  </script>
+  
+  
+
+    </body>
+</html>

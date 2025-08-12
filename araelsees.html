@@ -1,0 +1,460 @@
+<!DOCTYPE html> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="utf-8">
+    <title>Arael Sees</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="siteimages/intface2.png"> 
+
+<style> 
+body {
+    background-color: black;
+}
+
+body::before {
+content: "";
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-image: url('siteimages/atlantis cellophane shorter.gif'); 
+background-size: cover;
+background-position: center;
+opacity: 0.2; 
+z-index: -1;
+}
+
+@font-face {
+font-family: 'ttcw type';
+src: url('Fonts/TTCWTEST4.woff2') format('woff2');
+font-weight: normal; 
+font-style: normal;
+}
+
+@font-face {
+font-family: 'DAYROM';
+src: url('Fonts/DAYROM__.woff2') format('woff2');
+font-weight: normal; 
+font-style: normal; 
+}
+
+@font-face {
+font-family: 'gismonda';
+src: url('Fonts/webfontkit-20250128-111642/gismonda-webfont.woff2') format('woff2'),
+url('Fonts/webfontkit-20250128-111642/gismonda-webfont.woff2') format('woff2');
+font-weight: normal; 
+font-style: normal; 
+}
+
+@font-face {
+font-family: 'teutonic';
+src: url('Fonts/teutonic1.woff2') format('woff2'),
+url('Fonts/teutonic1.woff2') format('woff2');
+font-weight: normal;
+font-style: normal; 
+}
+
+.rainbow-text {
+animation: rainbow 5s linear infinite;
+}
+
+@keyframes rainbow {
+  0%   { color: red; }
+  16%  { color: orange; }
+  33%  { color: yellow; }
+  50%  { color: rgb(0, 255, 0); }
+  66%  { color: rgb(0, 149, 255); }
+  83%  { color: rgb(174, 62, 255); }
+  100% { color: red; } 
+}
+
+
+.top-bar {
+position: fixed;   
+top: 0;       
+left: 0;           
+width: 100%;     
+height: 130px;     
+background: url('siteimages/topbarbg2.png') no-repeat center;
+background-size: 110% 110%; 
+display: flex;
+justify-content: center; 
+align-items: center;
+z-index: 1000;    
+}
+
+.top-title {
+color: #FFD94F;
+font-family: 'ttcw type';
+font-size: 32px;
+font-weight: bold;
+margin: 0;
+padding-bottom: 80px;
+text-shadow: 
+-1px -1px 0 #000,  
+1px -1px 0 #000,
+-1px  1px 0 #000,
+1px  1px 0 #000;
+}
+
+.center {
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 50%; 
+}
+
+.gallery-container {
+margin-top: 60px; 
+padding: 60px;
+}
+
+.gallery {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+gap: 20px;
+}
+
+.gallery img {
+width: 300px;
+height: 300px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+transition: transform 0.3s ease;
+}
+
+.gallery img:hover {
+transform: scale(1.05);
+cursor: pointer;
+}
+
+.close {
+position: absolute;
+top: 30px;
+right: 40px;
+color: #FFD94F;
+font-size: 40px;
+font-weight: bold;
+cursor: pointer;
+user-select: none;
+}
+
+
+.audio-wrapper {
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 100px;
+background: url('siteimages/audiobarbg3.png') no-repeat center;
+background-size: 110% 110%; 
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 1000;
+}
+
+.audio-btn {
+font-size: 28px;
+background-color: transparent;
+border: none;
+color: #FFD94F;
+cursor: pointer;
+z-index: 1;
+transform: translateY(50px);
+-webkit-text-stroke: 2px black; 
+}
+
+.volume-container {
+position: absolute;
+right: 55px;
+bottom: 10px;
+}
+
+.volume-slider {
+width: 150px; 
+height: 6px;
+background: rgb(0, 0, 0);
+accent-color: #FFD94F;
+border: 1px solid black;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.volume-slider::-webkit-slider-thumb {
+background-color: #FFD94F; 
+border-radius: 50%;
+border: 2px solid #000;
+width: 20px;
+height: 20px;
+cursor: pointer;
+}
+
+.volume-slider:hover {
+background: rgb(0, 0, 0);
+}
+
+.hover-zone {
+fill: transparent;
+stroke: rgba(255, 0, 0, 0); 
+stroke-width: 3;
+pointer-events: all; 
+transition: stroke 0.3s ease;
+}
+
+.hover-zone:hover {
+stroke: rgba(50, 55, 237, 1);
+animation: glowPulse 1.5s infinite;
+filter: url(#glow);
+}
+
+.back-button {
+position: fixed;
+top: 20px;
+left: 20px;
+color: #FFD94F;
+font-family: 'ttcw type', sans-serif;
+font-size: 20px;
+text-decoration: none;
+z-index: 2000;
+background-color: transparent;
+padding: 5px 10px;
+border: 2px solid #FFD94F;
+border-radius: 20px;
+opacity: 0.3;
+transition: background-color 0.3s, transform 0.2s;
+}
+
+.back-button:hover {
+background-color: rgba(255, 217, 79, 0.1);
+transform: scale(1.05);
+opacity: 1.0;
+cursor: pointer;
+}
+
+.side-caption-box {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.95);
+color: #FFD94F;
+font-family: 'DAYROM', sans-serif;
+padding: 20px;
+overflow-y: auto;
+box-shadow: 2px 0 12px rgba(0,0,0,0.8);
+z-index: 800;
+display: none;
+flex-direction: column;
+justify-content: center;
+}
+
+.side-caption-content {
+width: 55%;
+height: 100%;
+font-size: 10px;
+text-align: center; 
+z-index: 999;
+line-height: 1.6;
+text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
+            -1px  1px 0 #000, 1px  1px 0 #000;
+transition: opacity 0.5s ease-in-out;
+opacity: 1;
+animation: rainbow 5s linear infinite;
+}
+
+@keyframes rainbow {
+  0%   { color: red; }
+  16%  { color: orange; }
+  33%  { color: yellow; }
+  50%  { color: rgb(0, 255, 0); }
+  66%  { color: rgb(0, 149, 255); }
+  83%  { color: rgb(174, 62, 255); }
+  100% { color: red; } 
+    }
+
+.caption-image {
+position: fixed;
+top: 150px;
+left: 51%;
+transform: translateX(-51%);
+width: 35vw;
+height: auto;
+max-height: calc(100% - 130px);
+object-fit: contain;
+z-index: 900;
+display: none;
+box-shadow: 0 0 20px rgba(255, 217, 79, 0.4);
+}
+</style>
+</head>
+
+<body>
+<div class="top-bar" id="topBar">
+    <h1 class="top-title">arael sees</h1>
+</div> 
+
+<a href="index.html" class="back-button">⬅</a>
+
+<div class="audio-wrapper" style="padding-bottom: 20px;"> 
+    <div class="audio-controls">
+        <div class="left-space"></div> 
+        <button id="playPauseBtn" class="audio-btn">❚❚</button>
+        <div class="volume-container">
+            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.01">
+        </div>
+    </div>
+
+    <audio id="backgroundAudio" loop autoplay>
+        <source src="Audio/arael eyes page audio.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+
+<div class="gallery-container" style="padding-top: 100px;">
+        
+
+    <div id="sideCaptionBox" class="side-caption-box">
+        <div class="side-caption-content" id="sideCaptionText">
+        
+            
+    
+        </div>
+      </div>
+      <div id="captionText" class="rainbow-text" style="
+    position: fixed;
+    top: 100px;
+    right: 60px;
+    width: 35vw;
+    font-family: 'DAYROM', sans-serif;
+    font-size: 20px;
+    text-align: center;
+    z-index: 950;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
+                 -1px  1px 0 #000, 1px  1px 0 #000;
+    display: none;
+"></div>
+      <img id="captionImage" class="caption-image" src="" alt="">
+
+    <div class="gallery">
+
+
+        <img loading="lazy" src="siteimages/araeleyescollages/windowpanel1.png" alt="Window Panel I" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">   
+        <img loading="lazy" src="siteimages/araeleyescollages/avocet.png" alt="༺Avocet༻" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">
+        <img loading="lazy" src="siteimages/araeleyescollages/window panel2.png" alt="Window Panel II" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">
+        <img loading="lazy" src="siteimages/araeleyescollages/vanilla buddy.png" alt="Vanilla Buddy" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">       
+        <img loading="lazy" src="siteimages/araeleyescollages/beetle gleeble breaking it down at the temple.png" alt="Beetle Gleeble breaking it down at the Temple" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">  
+        <img loading="lazy" src="siteimages/araeleyescollages/butterflysun.png" alt="Butterfly Sun" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">      
+        <img loading="lazy" src="siteimages/araeleyescollages/Mushbrain.png" alt="Mushbrain" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">     
+        <img loading="lazy" src="siteimages/araeleyescollages/GalGate.png" alt="GalGate" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">         
+        <img loading="lazy" src="siteimages/araeleyescollages/mountainshrineembyro.png" alt="Mountain Shrine Embyro" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">       
+        <img loading="lazy" src="siteimages/araeleyescollages/Snake Rings temple.png" alt="Snake Rings Temple" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">         
+        <img loading="lazy" src="siteimages/araeleyescollages/DEFISHED.png" alt="Defished" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">
+        <img loading="lazy" src="siteimages/araeleyescollages/Cathedral playingcards.png" alt="Cathedral Playing Cards" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">
+        <img loading="lazy" src="siteimages/araeleyescollages/idea3.png" alt="Fields of Ohm" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">
+        <img loading="lazy" src="siteimages/araeleyescollages/The Arc Side Pacific.png" alt="The Arc Side Pacific" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">
+        <img loading="lazy" src="siteimages/araeleyescollages/underlying.png" alt="Underlying" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">
+        <img loading="lazy" src="siteimages/araeleyescollages/cletf.png" alt="Cletf" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">
+        <img loading="lazy" src="siteimages/araeleyescollages/snake rings.jpg" alt="And its Three Rings" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">
+        <img loading="lazy" src="siteimages/araeleyescollages/collagemanorpilled.png" alt="Manor Pilled" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">
+        <img loading="lazy" src="siteimages/araeleyescollages/chrysalis (an egg in your hand).jpg" alt="Chrysalis (an egg in your hand)" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">
+        <img loading="lazy" src="siteimages/araeleyescollages/trust.png" alt="Trust" class="hover-zone sound-hover" data-audio="Audio/araelbow page audio/araelbow pane select.mp3">
+        
+    </div>
+</div>
+
+<div style="padding-bottom: 100px;"></div>
+
+<script>
+
+
+const hoverAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+const hoverAudioBuffers = {};
+
+async function loadHoverAudio(url) {
+    if (hoverAudioBuffers[url]) return hoverAudioBuffers[url];
+    const response = await fetch(url);
+    const arrayBuffer = await response.arrayBuffer();
+    const audioBuffer = await hoverAudioContext.decodeAudioData(arrayBuffer);
+    hoverAudioBuffers[url] = audioBuffer;
+    return audioBuffer;
+}
+
+async function playHoverSound(url) {
+    const buffer = await loadHoverAudio(url);
+    const source = hoverAudioContext.createBufferSource();
+    source.buffer = buffer;
+    source.connect(hoverAudioContext.destination);
+    source.start(0);
+}
+
+document.querySelectorAll('.sound-hover').forEach(zone => {
+    zone.addEventListener('click', function () {
+        const soundFile = this.getAttribute('data-audio');
+        if (soundFile) {
+            playHoverSound(soundFile);
+        }
+    });
+});
+
+const audio = document.getElementById("backgroundAudio");
+const playPauseBtn = document.getElementById("playPauseBtn");
+const volumeSlider = document.getElementById("volumeSlider");
+
+playPauseBtn.textContent = "❚❚";
+
+playPauseBtn.addEventListener("click", () => {
+    if (audio.paused) {
+        audio.play();
+        playPauseBtn.textContent = "❚❚"; 
+    } else {
+        audio.pause();
+        playPauseBtn.textContent = "►"; 
+    }
+});
+
+volumeSlider.addEventListener("input", () => {
+    const volume = volumeSlider.value;
+    audio.volume = volume; 
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+    const defaultVolume = 0.5;
+    audio.volume = defaultVolume;
+    volumeSlider.value = defaultVolume;
+});
+
+const sideCaptionBox = document.getElementById('sideCaptionBox');
+    const sideCaptionText = document.getElementById('sideCaptionText');
+    const captionImage = document.getElementById('captionImage');
+
+    document.querySelectorAll('.gallery img').forEach(img => {
+        img.addEventListener('click', () => {
+  sideCaptionBox.style.display = 'flex';
+  captionImage.style.display = 'block';
+  captionImage.src = img.src;
+  captionImage.alt = img.alt;
+
+});
+    });
+
+    
+    window.addEventListener('click', e => {
+      if (e.target.id === 'sideCaptionBox' || e.target === captionImage) return;
+      if (!e.target.closest('.gallery')) {
+        sideCaptionBox.style.display = 'none';
+captionImage.style.display = 'none';
+document.getElementById('captionText').style.display = 'none';
+clearInterval(captionInterval);
+
+      }
+    });
+</script>
+</body>
+</html>
+
+

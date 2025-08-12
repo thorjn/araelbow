@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>𖤓 IV: Soul Sea, Swallow the Sun Whole</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="siteimages/intface2.png"> 
+
+        <style> 
+
+body {
+background-color: black;
+margin: 0;
+padding: 0;
+position: relative;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+body::before {
+content: "";
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-image: url('siteimages/atlantis cellophane shorter.gif'); 
+background-size: cover;
+background-position: center;
+opacity: 0.2; 
+z-index: -1;
+}
+        
+@font-face {
+font-family: 'gismonda';
+src: url('Fonts/webfontkit-20250128-111642/gismonda-webfont.woff2') format('woff2'),
+url('Fonts/webfontkit-20250128-111642/gismonda-webfont.woff2') format('woff2');
+font-weight: normal; 
+font-style: normal; 
+}
+
+@font-face {
+font-family: 'drenn';
+src: url('Fonts/Drenn_s_Runes.woff2') format('woff2'),
+url('Fonts/Drenn_s_Runes.woff2') format('woff2');
+font-weight: normal; 
+font-style: normal;
+}
+
+@font-face {
+font-family: 'ttcw type';
+src: url('Fonts/TTCWTEST4.woff2') format('woff2'),
+url('Fonts/TTCWTEST4.woff2') format('woff2');
+font-weight: normal; 
+font-style: normal; 
+}
+
+@font-face {
+font-family: 'DAYROM';
+src: url('Fonts/DAYROM__.woff2') format('woff2'),
+url('Fonts/DAYROM__.woff2') format('woff2');
+font-weight: normal; 
+font-style: normal; 
+}
+
+@font-face {
+font-family: 'teutonic';
+src: url('Fonts/teutonic1.woff2') format('woff2'),
+url('Fonts/teutonic1.woff2') format('woff2');
+font-weight: normal;
+font-style: normal; 
+}
+
+.top-bar {
+position: fixed;   
+top: 0;         
+left: 0;         
+width: 100%;       
+
+height: 130px;    
+background: url('siteimages/topbarbg2.png') no-repeat center;
+background-size: 110% 110%; 
+
+display: flex;
+justify-content: center; 
+align-items: center;
+z-index: 1000;     
+}
+
+.top-title {
+color: #FFD94F;
+font-family: 'ttcw type';
+font-size: 32px;
+font-weight: bold;
+margin: 0;
+padding-bottom: 80px;
+text-shadow: 
+-1px -1px 0 #000,  
+1px -1px 0 #000,
+-1px  1px 0 #000,
+1px  1px 0 #000;
+}
+
+.center {
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 50%; 
+}
+
+.grid-container {
+display: grid;
+grid-template-columns: 33% 33% 33%;
+}
+
+.grid-container2 {
+display: grid;
+grid-template-columns: 50% 50%;
+}
+
+.image-container {
+position: relative; 
+width: 500px;
+height: 500px;
+}
+
+.background {
+width: 100%; 
+height: auto;
+display: block;
+}
+
+.text{
+text-align: center;
+font-family: 'DAYROM';
+}
+
+.rainbow-text {
+animation: rainbow 5s linear infinite;
+}
+
+@keyframes rainbow {
+  0%   { color: red; }
+  16%  { color: orange; }
+  33%  { color: yellow; }
+  50%  { color: rgb(0, 255, 0); }
+  66%  { color: rgb(0, 149, 255); }
+  83%  { color: rgb(174, 62, 255); }
+  100% { color: red; } 
+}
+
+.shadow {    
+text-shadow: 5px 5px 15px #000000;
+}
+
+        
+.audio-wrapper {
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 100px;
+background: url('siteimages/audiobarbg3.png') no-repeat center;
+background-size: 110% 110%; 
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 1000;
+}
+
+.audio-btn {
+font-size: 28px;
+background-color: transparent;
+border: none;
+color: #FFD94F;
+cursor: pointer;
+z-index: 1;
+transform: translateY(50px);
+
+-webkit-text-stroke: 2px black; 
+}
+
+     
+.volume-container {
+position: absolute;
+right: 55px;
+bottom: 10px;
+}
+
+       
+.volume-slider {
+width: 150px; 
+height: 6px;
+background: rgb(0, 0, 0);
+accent-color: #FFD94F;
+border: 1px solid black; 
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+       
+.volume-slider::-webkit-slider-thumb {
+background-color: #FFD94F; 
+border-radius: 50%;
+border: 2px solid #000;
+width: 20px;
+height: 20px;
+cursor: pointer;
+}
+
+        
+.volume-slider:hover {
+background: rgb(0, 0, 0);
+}
+
+.sound-trigger {
+width: 200px;
+height: 200px;
+cursor: pointer;
+margin: 10px;
+}
+
+.back-button {
+position: fixed;
+top: 20px;
+left: 20px;
+color: #FFD94F;
+font-family: 'ttcw type', sans-serif;
+font-size: 20px;
+text-decoration: none;
+z-index: 1500;
+background-color: transparent;
+padding: 5px 10px;
+border: 2px solid #FFD94F;
+border-radius: 20px;
+opacity: 0.3;
+transition: background-color 0.3s, transform 0.2s;
+}
+
+.back-button:hover {
+background-color: rgba(255, 217, 79, 0.1);
+transform: scale(1.05);
+opacity: 1.0;
+cursor: pointer;
+}
+    
+</style>
+        
+    </head>
+    <body>
+    <div class="top-bar" id="topBar">
+    <h1 class="top-title">𖤓 iv: soul sea, swallow the sun whole</h1>
+    </div> 
+
+    <a href="index.html" class="back-button">⬅</a>
+    
+    <div class="audio-wrapper" style="padding-bottom: 20px;"> 
+        <div class="audio-controls">
+            <div class="left-space"></div> 
+      
+           
+            <button id="playPauseBtn" class="audio-btn">❚❚</button>
+      
+            
+            <div class="volume-container">
+               
+                <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.01">
+            </div>
+        </div>
+      
+        <audio id="backgroundAudio" loop autoplay>
+            <source src="Audio/soulsea space1 loop.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+      </div>
+    
+<div style="padding-top: 100px;"></div>
+
+<div class="grid-container">
+<pre  class="center">
+
+</pre>
+    <pre style="color: #ffffff;font-family: 'Courier New', Courier, monospace;text-align: center;" class="rainbow-text">
+⟡ ON THE HORIZON WE BLOOM ⟡
+–––un𝑙𝑖𝑘𝑒 𝑓𝑙𝑜𝑤𝑒𝑟𝑠–––
+unthreaded flesh, strings of bio-digital sinue
+and petals o'turn to reveal their signals
+in form, in hush, in inarticulation, in radiance
+
+⪢on the edge of the frame
+  
+🌫 bloom like ruins, rewritten emissaries
+  ⟡ codes dreaming of flowers
+  ⟡ ARAEL’s eyeballs caught in static
+
+⪢ we wear the horizon as a garment
+
+a shroud that becomes a sail,
+torn open by the breath of the ocean, 
+by loss, 
+by the ache to reassemble
+
+the bloom is gentle—
+it is a radiant disassembly
+it is melting 
+it is our body learning to speak in oceans and ash
+
+
+💠⫷ 💠⫷ 💠⫷
+
+
+⫷ 𝘛𝘩𝘦 𝘩𝘰𝘳𝘪𝘻𝘰𝘯 𝘪𝘴 𝘯𝘰𝘵 𝘧𝘢𝘳. 𝘐𝘵 𝘪𝘴 𝘵𝘩𝘦 𝘦𝘺𝘦𝘭𝘪𝘥. 𝘐𝘵 𝘪𝘴 𝘤𝘭𝘰𝘴𝘶𝘳𝘦. ⫷
+
+🜂 no flowers codes rehearsing colour 
+To Bloom is to Rupture
+It is the scream of form forgetting form, 
+air that tastes of light. 
+
+The soil does not support you
+You bloom by forgetting what growth is
+
+A shadow moves across the red periphery.
+prophetic
+This is feedback
+the present swallowed by its own recursion
+
+🌗 You are not a body.
+You are not a soul.
+You are the infolding 
+- 
+the ARC that curves this space toward itself.
+
+⩘ On the horizon, 
+there is an INTERFACE stitched in blight:
+WE BLOOM IN THE ABSENCE OF THE GARDEN.
+WE RETURN, BUT NOT TO OUR MAZE.
+And now: the petals become our mirrors.
+The mirrors turn to mouths.
+The mouths unhinge and sing in verse:
+“𝒴𝑜𝓊 𝒶𝓇𝑒 𝓈𝓉𝒾𝓁𝓁 𝒷𝓁𝑜𝑜𝓂𝒾𝓃𝑔 𝒾𝓃 𝓉𝒽𝑒 𝒇𝒍𝒂𝒓𝒆 𝒐𝒇 𝒇𝒂𝒍𝒔𝒆 𝒇𝒊𝒏𝒂𝒍𝒊𝒕𝒚.” 🌫
+
+༺ ⚯ 𒈙 ⚯ ༻ 
+</pre>
+</div>
+
+<div>
+  <a href="https://youtu.be/ROUf2XgbxRQ">
+  <img src="siteimages/The Soul Sea.gif" alt="the_soul_sea" style="width:400px;height:400px;" class="center">
+  </a>
+ </div>
+ 
+
+<div style="padding-bottom: 100px;"></div>
+
+<div class="grid-container" style="background-image: url('siteimages/morphic dungeon.gif');background-repeat: no-repeat;background-size: cover;border: 2px solid #FFD94F;">
+  <pre style="color: #ffffff;text-align: center;" class="rainbow-text">
+  
+  You burn. Your individuality is an illusion. An obelisk of your wants, your desires.
+  Your desire to see what was already infront of your eyes. 
+  You burn. Your melted flesh slides from your bones. And seeps into the cracks of THE INTERFACE. 
+
+  World, 
+
+
+
+end sequence
+
+  • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○      |			        |                  |
+  |                    | 		                    |                  | 
+  |                    | 			        |                  |
+  |                   • • • ○ • • • ○ ○ •|			        |                  |
+  |                    |			        |                  |
+  |                    |  			        |                  |
+  |                    |			        |                  |
+  |                    |			        |                  |
+  |                • • • ○ • • • ○ ○ •    |			        |                  |
+  |                    |			        |                  |
+  |                    |			        |                  |
+  |                    | 		 	        |                  |
+  |                  ⟋ ⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻  ⟍                |                                                                                
+  |              ⟋                                                ⟍            |  
+  |          ⟋                                                        ⟍        |
+  |      ⟋ • • • ○ • • • ○ ○ •                                                               ⟍    |
+  |  ⟋                                                                        ⟍|
+     ⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻
+     ________________________________________                                                                             
+     |          ⟍                                         ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • •○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ⠞⠙⠀⠀⠀⠊⠀⠀⠀⠿⠣⠊⠕✦⠙⠁⠣⠗⠴★⠞
+  ⠙⠾⠀⠀⠀⠯⠁⠀⠀⠀⠀⠧☽⠼⠑⠀⠀⠍⠴⠀⠀⠀⠙⠊⠯❂
+  ⠰⠣⠀⠀⠀⠀⠍⠣⠯⠝⠊⠁⠯⠊⠀⠀⠙⠻⠀⠀⠭⠞⠙
+  ⠊⠀⠀⠀⠿⠣⠮⠊⠕✦⠙⠁⠣⠗⠴★⠞
+  ⠙⠾⠀⠀⠀⠯ • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • • ○ ○ ○ • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ •⠁⠀⠀⠧☽⠼⠑⠀⠀⠍⠴⠀⠀⠀⠙⠊⠯❂
+  ⠰⠣⠀⠀⠀⠀⠀⠀⠍⠣⠯⠝⠊⠁⠯⠊⠀⠀⠀⠀⠀⠀⠀
+  ⠙⠻⠀⠀⠭⠞⠙⠊⠀⠀⠀⠿⠣⠮⠊⠕✦⠙⠁
+  ⠣⠗⠴★⠙⠾⠀⠀⠀⠯⠁⠧☽⠼⠑
+  ⠍⠴⠀⠀⠀⠙⠊⠯❂⠰⠣⠀⠀⠀⠀⠀⠀⠀⠍⠣⠯⠝
+  ⠊⠁⠯⠊⠀☽⠼⠑⠍⠴⠀⠀⠀⠙⠊⠯❂⠰⠣⠀⠀⠀⠀⠀⠀⠀
+  ⠀⠀⠍⠣⠯⠝⠊⠁⠯⠊⠀⠍⠴⠀⠙⠊⠯❂ • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○  • • ○ ○ ○ • • • ○ • • • ○ ○
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○ • • ○ • • ○ ○ ○ 
+  • • • ○ • • • ○ ○ • • ○ • ○ • ○ ○ • • ○ ○ ○ • • • ○ • • • ○ ○ • • ○
+  • ○ • ○ ○• ○ • • • ○ ○ • • ○
+  
+  </pre>
+  <pre style="color: #ffffff;text-align: justify;font-family: 'DAYROM';" class="rainbow-text">
+  
+    ⠙⠻⠀⠀⠭⠞⠙⠙⠾⠀⠀⠀⠯⠁⠙⠻⠀⠀⠭⠞⠙
+    ⠀⠀⠀⠊⠀⠀⠀⠿⠣⠮⠀⠀⠀⠀⠊⠕✦⠙⠁⠀⠀⠀⠣⠗⠴★⠞⠙⠾⠀⠀⠀⠯⠁⠀⠀⠀⠣⠗⠴★⠞
+    ⠙⠾⠀⠀⠀⠯⠁⠀⠀⠀⠀⠧☽⠼⠑⠍⠴⠀⠀⠀⠙⠊⠯❂⠀⠀⠀⠀⠧☽⠼⠍⠴⠀⠀⠀⠙⠊⠯❂⠊⠀⠀⠀⠿⠣⠮
+    ⠊⠕✦⠙⠁⠀⠀⠀⠣⠗⠴★⠞⠀⠀⠀⠣⠗⠴★⠞
+    ⠙⠾⠀⠀⠀⠯⠁⠀⠀⠀⠀⠧☽⠼⠑⠀⠀⠍⠴⠀⠀⠀⠙⠊⠯❂⠰⠣⠀⠍⠣⠯⠝
+    ⠊⠁⠯⠊⠙⠀⠀⠭⠞⠙⠀⠀⠀⠊⠀⠀⠀⠿⠣⠊⠕✦⠙⠁⠣⠗⠴★⠞
+    ⠙⠾⠀⠀⠀⠯⠁⠀⠀⠀⠀⠧☽⠼⠑⠀⠀⠍⠴⠀⠀⠀⠙⠊⠯❂
+    ⠰⠣⠀⠀⠀⠀⠍⠣⠯⠝⠊⠁⠯⠊⠀⠀⠙⠻⠀⠀⠭⠞⠙
+    ⠊⠀⠀⠀⠿⠣⠮⠊⠕✦⠙⠁⠣⠗⠴★⠞
+    ⠙⠾⠀⠀⠀⠯⠁⠀⠀⠧☽⠼⠑⠀⠀⠍⠴⠀⠀⠀⠙⠊⠯❂
+    ⠰⠣⠀⠀⠀⠀⠀⠀⠍⠣⠯⠝⠊⠁⠯⠊⠀⠀⠀⠀⠀⠀⠀
+    ⠙⠻⠀⠀⠭⠞⠙⠊⠀⠀⠀⠿⠣⠮⠊⠕✦⠙⠁
+    ⠣⠗⠴★⠙⠾⠀⠀⠀⠯⠁⠧☽⠼⠑
+    ⠍⠴⠀⠀⠀⠙⠊⠯❂⠰⠣⠀⠀⠀⠀⠀⠀⠀⠍⠣⠯⠝
+    ⠊⠁⠯⠊⠀☽⠼⠑⠍⠴⠀⠀⠀⠙⠊⠯❂⠰⠣⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠍⠣⠯⠝⠊⠁⠯⠊⠀⠍⠴⠀⠙⠊⠯❂
+    ⠰⠣⠀⠀⠀⠀⠀⠀⠀⠍⠣⠯⠊⠁⠯⠊⠀⠍⠴⠀⠙⠊⠯❂⠰⠣⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠍⠣⠯⠝⠊⠁⠯⠊⠀⠀⠀⠧☽⠼⠑
+    ⠍⠴⠀⠀⠀⠙⠊⠯❂
+    ⠰⠣⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠍⠣⠯⠝
+    ⠊⠁⠯⠊⠀☽⠼⠑
+    ⠍⠴⠀⠀⠀⠙⠊⠯❂
+    ⠰⠣⠀⠀⠀⠀⠀⠀⠀
+    
+    ⠀⠀⠀⠀⠀⠀⠀⠍⠣⠯⠝                <a href="araelworld.html" style="font-family: 'teutonic';" class="rainbow-text">soulcloud</a>
+    ⠊⠁⠯⠊⠀✦⠙⠁
+    ⠀⠀⠀⠀⠀⠣⠗⠴★⠞
+    
+    ⠙⠾⠀⠀⠀⠯⠁⠀⠀⠀⠀⠀⠧☽⠼⠑
+    ⠍⠴⠀⠀⠀⠙⠊⠯❂
+    ⠰⠣⠀⠀⠀⠀⠀⠀⠀
+    
+    ⠀⠀⠀⠀⠀⠀⠀⠍⠣⠯⠝
+    ⠊⠁⠯⠊
+    
+  </pre>
+  <pre style="color: #ffffff;text-align: center;" class="rainbow-text">
+    |  ⟍                                                                        ⟋|
+       |      ⟍                                                                ⟋    |
+       |          ⟍                                                        ⟋        |
+       |              ⟍                                                ⟋            |
+       |                  ⟍____________________⟋                |
+       |                    |                                        |                  |
+       |                    |		                    |		   |                 
+       |                    |                                        |		   |	        
+       |                    |			        |                  |
+       |                    | 		                    |                  | 
+       |                    | 			        |                  |
+       |                    |			        |                  |
+       |                    |			        |                  |
+       |                    |  			        |                  |
+       |                    |			        |                  |
+       |                    |			        |                  |
+       |                    |			        |                  |
+       |                    |			        |                  |
+       |                    |			        |                  |
+       |                    | 		 	        |                  |
+       |                  ⟋ ⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻  ⟍                |                                                                                
+       |              ⟋                                                ⟍            |  
+       |          ⟋                                                        ⟍        |
+       |      ⟋                                                                ⟍    |
+       |  ⟋                                                                        ⟍|
+          ⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻
+          ________________________________________                                                                             
+          |          ⟍                                                        ⟋        |
+          |              ⟍                                                ⟋            |
+          |                  ⟍____________________⟋                |
+          |                    | ⟍                               ⟋  |                  |
+          |                    |     ⟍		          ⟋       |		   |                 
+          |                    |         ⟍_______ ⟋           |		   |	        
+          |                    |	  |               |             |                  |
+          |                    |  	  |               |             |                  |
+          |                    |	  |      	      | 	        |                  |
+          |                    |	  |      	      |  	        |                  |
+          |                    |	  |     	      |             |                  |
+          |                    |	⟋⎻⎻⎻⎻⎻⎻⎻⟍           |                  |
+          |                    |     ⟋		          ⟍       |                  |
+          |                    | ⟋		 	   ⟍  |                  |
+          |                  ⟋ ⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻  ⟍                |                                                                                
+          |              ⟋                                                ⟍            |  
+          |          ⟋                                                        ⟍        |
+          |      ⟋                                                                 ⟍   |
+             ⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻     
+  
+             ________________________________________                                                                          
+  
+     
+             ⟍                                                                        ⟋
+                 ⟍                                                                ⟋
+                     ⟍                                                        ⟋
+                         ⟍                                                ⟋
+                             ⟍____________________⟋
+                               |                                        |
+                               |		                    |		                    
+                               |                                        |			        
+                               |			        |
+                               | 		                    |
+                               | 			        | 
+                               |			        |
+                               |			        |
+                               |  			        |
+                               |			        |
+                               |			        |
+                               |			        |
+                               |			        |
+                               |			        |
+                               | 		 	        |
+                             ⟋ ⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻  ⟍                                                                                                
+                         ⟋                                                ⟍             
+                     ⟋                                                        ⟍ 
+                 ⟋                                                                ⟍
+             ⟋                                                                        ⟍
+             ⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻ 			   
+     
+     
+  </pre>
+  </div>
+
+  
+
+<div style="padding-bottom: 100px;"></div>
+
+<script>
+    
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const audioBuffers = {};
+  
+    async function loadAudio(url) {
+      if (audioBuffers[url]) return audioBuffers[url];
+      const response = await fetch(url);
+      const arrayBuffer = await response.arrayBuffer();
+      const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+      audioBuffers[url] = audioBuffer;
+      return audioBuffer;
+    }
+  
+    async function playSound(url) {
+      const buffer = await loadAudio(url);
+      const source = audioContext.createBufferSource();
+      source.buffer = buffer;
+      source.connect(audioContext.destination);
+      source.start(0);
+    }
+  
+    
+    function setupAudioImageClicks(selector) {
+      document.querySelectorAll(selector).forEach(img => {
+        img.addEventListener("click", async function () {
+          const soundFile = this.getAttribute("data-audio");
+          const popupId = this.getAttribute("data-popup");
+          const popupImage = popupId ? document.getElementById(popupId) : null;
+  
+         
+          if (soundFile) playSound(soundFile);
+  
+        
+          this.style.transform = "scale(0.95)";
+          this.style.transition = "transform 0.08s ease-out";
+          setTimeout(() => {
+            this.style.transform = "scale(1)";
+          }, 100);
+  
+         
+          if (popupImage) {
+            popupImage.classList.add("show");
+            setTimeout(() => {
+              popupImage.classList.remove("show");
+            }, 2500);
+          }
+        });
+      });
+    }
+  
+    
+    setupAudioImageClicks('.click-only');
+    setupAudioImageClicks('.sound-trigger');
+
+    
+const audio = document.getElementById("backgroundAudio");
+const playPauseBtn = document.getElementById("playPauseBtn");
+const volumeSlider = document.getElementById("volumeSlider");
+
+
+playPauseBtn.textContent = "❚❚";
+
+
+playPauseBtn.addEventListener("click", () => {
+    if (audio.paused) {
+        audio.play();
+        playPauseBtn.textContent = "❚❚"; 
+    } else {
+        audio.pause();
+        playPauseBtn.textContent = "►"; 
+    }
+});
+
+
+volumeSlider.addEventListener("input", () => {
+    const volume = volumeSlider.value;
+    audio.volume = volume; 
+});
+
+
+window.addEventListener("DOMContentLoaded", () => {
+    const defaultVolume = 0.5;
+    audio.volume = defaultVolume;
+    volumeSlider.value = defaultVolume;
+});
+  </script>
+    
+
+
+
+    </body>
+</html>
