@@ -158,8 +158,12 @@ transform: translateY(50px);
 
 .volume-container {
 position: absolute;
+background-color: #000;
+border: 2px solid #FFD94F;
+border-radius: 20px;
 right: 55px;
 bottom: 10px;
+padding: 5px;
 }
 
 .volume-slider {
@@ -187,11 +191,14 @@ background: rgb(0, 0, 0);
 
 .timeline-container {
     position: absolute;
-  
+    background-color: #000;
+    border: 2px solid #FFD94F;
+    border-radius: 20px;
     left: 50%;
     transform: translateX(-50%);
     bottom: 50px;
     width: 50%;
+    padding: 5px;
 }
 
 .timeline-slider {
@@ -707,17 +714,17 @@ document.querySelectorAll('.audio-track').forEach(track => {
     document.getElementById("chorusBtn").addEventListener("click", () => {
   clearFX();
 
-  // Show both FX panels
+  
   document.getElementById("chorusControls").style.display = "block";
   document.getElementById("delayControls").style.display = "block";
 
 
-  // === FILTER SETUP ===
+  // FILTER 
 const lowpassFilter = audioCtx.createBiquadFilter();
 lowpassFilter.type = "lowpass";
 
 const lowpassSlider = document.getElementById("lowpassSlider");
-lowpassSlider.value = 100; // Max slider position
+lowpassSlider.value = 100; 
 
 function sliderToFrequency(sliderValue) {
   const minFreq = 20;
@@ -728,13 +735,13 @@ function sliderToFrequency(sliderValue) {
   return Math.pow(10, logValue);
 }
 
-// Set initial frequency to 20kHz
+
 let now = audioCtx.currentTime;
 const initialFreq = sliderToFrequency(100);
 lowpassFilter.frequency.cancelScheduledValues(now);
 lowpassFilter.frequency.setValueAtTime(initialFreq, now);
 
-// Handle slider input
+
 lowpassSlider.addEventListener("input", () => {
   const normalized = parseFloat(lowpassSlider.value);
   const freq = sliderToFrequency(normalized);
@@ -823,7 +830,7 @@ sourceNode.connect(lowpassFilter);
 
 // Connect filter → chorus → delay → output
 lowpassFilter.connect(delay);             // Chorus
-delay.connect(delayNode);                 // Then delay
+delay.connect(delayNode);                 // Delay
 delayNode.connect(delayWetGain);          // Delay output
 
 // Dry path
@@ -833,7 +840,7 @@ lowpassFilter.connect(dryGain);
 dryGain.connect(audioCtx.destination);
 delayWetGain.connect(audioCtx.destination);
 
-// Optional: remove chorusWetGain if not used separately
+
 
 
 
